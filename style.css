@@ -1,0 +1,18 @@
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+#theme {
+    background-color: rgba(96, 111, 197, 0.452);
+    height: 30px;
+    width: 70vw;
+    opacity: 0.6;
+    border-radius: 0 0 50px 50px;
+    border-bottom: 2px solid #0B7FC4;
+    box-shadow: 0 5px 15px #0B7FC4;
+}
