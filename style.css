@@ -7,12 +7,45 @@ body {
     align-items: center;
 }
 
-#theme {
-    background-color: rgba(96, 111, 197, 0.452);
+#theme-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    background-color: rgba(206, 206, 206, 0.452);
     height: 30px;
     width: 70vw;
     opacity: 0.6;
-    border-radius: 0 0 50px 50px;
-    border-bottom: 2px solid #0B7FC4;
-    box-shadow: 0 5px 15px #0B7FC4;
+    border: 0;
+    border-radius: 50px;
+    box-shadow: 2px 2px 5px #0B7FC4;    
+    font-family: Raleway, 'sans-serif';
+    font-size: 18px;
+    font-weight: bolder;
+    color: rgb(34, 34, 34);
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+#theme-button:hover {
+    background-color: #080808;
+    box-shadow: 2px 2px 8px #03314d;
+    color: white;    
+} 
+
+#container-contador {
+    margin: 30px;
+    display: flex;
+    padding: 100px;
+    border: 2px solid red;
+    border-radius: 50%;
+}
+
+#circulo-contador {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    border: 2px solid blue;
 }
