@@ -5,6 +5,7 @@ body {
     padding: 0;
     justify-content: center;
     align-items: center;
+    background-color: #ececec;
 }
 
 #theme-button {
@@ -34,11 +35,11 @@ body {
 } 
 
 #container-contador {
-    margin: 30px;
+    margin: 30px 0;
     display: flex;
-    padding: 100px;
-    border: 2px solid red;
+    padding: 0;
     border-radius: 50%;
+    background-color: rgba(206, 206, 206, 0.452);
 }
 
 #circulo-contador {
@@ -46,6 +47,28 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 18vw;
+    height: 18vh;
     margin: 0;
-    border: 2px solid blue;
+    border-radius: 50%;
+    padding: 100px;
+    border: 1px solid rgba(11, 127, 196, 0.9);
+    box-shadow: inset 0px 0px 15px 8px rgba(11, 127, 196, 0.9);
+    color: rgba(34, 34, 34, 0.8);
+    font-family: Raleway, sans-serif;
+    max-width: 150px;
+    max-height: 150px;
+    gap: 20px;
+}
+
+#contador {
+    font-size: 80px;
+    margin-top: 30px;
+}
+
+#minicontador {
+    font-size: 30px;
+    opacity: 0.8;
+    border-bottom: 1px solid #0B7FC4;
+    box-shadow: 0px 5px 5px -5px #0B7FC4;
 }
