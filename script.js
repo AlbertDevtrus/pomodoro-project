@@ -5,16 +5,38 @@ const resetButton = document.getElementById("reset");
 const skipButton = document.getElementById("skip");
 
 let seconds = 1500; 
-let intervalId;
+let intervalBigTimer;
 let running = false;
+let intervalNextTimer;
+let secondsTimer = 1500;
 
 function updateTimer () {
     if (seconds === 0) {
-        clearInterval(intervalId);
+        changeTimer();
     } else {
     seconds--;
     }
     timer.textContent = formatSeconds(seconds);
+}
+
+function changeTimer () {
+    if (secondsTimer === 1500) {        
+        clearInterval(intervalBigTimer);
+        seconds = 300;
+        secondsTimer = 300;
+        running = false;
+        startPauseButton.textContent = "S t a r t";
+        timer.textContent = "5:00";
+        nextTimer.textContent = "25:00";
+    } else if (secondsTimer === 300) {
+        clearInterval(intervalBigTimer);
+        seconds = 1500;
+        secondsTimer = 1500;
+        running = false;
+        startPauseButton.textContent = "S t a r t";
+        nextTimer.textContent = "5:00";
+        timer.textContent = "25:00";
+    }
 }
 
 function formatSeconds () {
@@ -28,24 +50,31 @@ function leftZero (number) {
 }
 
 //This function is for start and stop the timer 
-function startTimer () {
+function startBigTimer () {
     if (!running) {
-        intervalId = setInterval(function () {updateTimer(seconds)}, 1000);
+        intervalBigTimer = setInterval(function () {updateTimer(seconds)}, 1000);
         running = true;
     } else {
-        clearInterval(intervalId);
+        clearInterval(intervalBigTimer);
         running = false;
     }
 }
 
 //This function its given to a button to reset the timer 
-function resetTimer () {
-    clearInterval(intervalId);
-    seconds = 1500;
-    timer.textContent = "25:00";
+function resetBigTimer () {
+    clearInterval(intervalBigTimer);
+    running = false;
+    startPauseButton.textContent = "S t a r t";
+    seconds = secondsTimer;
+    if (secondsTimer === 1500) {
+        timer.textContent = "25:00";
+    } else {
+        timer.textContent = "5:00";
+    }
+    
 }
 
-startPauseButton.addEventListener('click', startTimer);
+startPauseButton.addEventListener('click', startBigTimer);
 // Change the text from the button pausa-start
 startPauseButton.addEventListener('click', function () {
     if (startPauseButton.textContent === "S t a r t") {
@@ -54,5 +83,6 @@ startPauseButton.addEventListener('click', function () {
         startPauseButton.textContent = "S t a r t";
     }
 })
-resetButton.addEventListener('click', resetTimer);
+resetButton.addEventListener('click', resetBigTimer);
+skipButton.addEventListener('click', changeTimer)
 
