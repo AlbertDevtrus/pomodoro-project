@@ -3,12 +3,14 @@ const nextTimer = document.getElementById("nextTimer");
 const startPauseButton = document.getElementById("pausa-start");
 const resetButton = document.getElementById("reset");
 const skipButton = document.getElementById("skip");
+const ringSound = document.getElementById("ringSound");
 
 let seconds = 1500; 
 let intervalBigTimer;
 let running = false;
 let intervalNextTimer;
 let secondsTimer = 1500;
+let breakTimer = 1;
 
 function updateTimer () {
     if (seconds === 0) {
@@ -19,8 +21,19 @@ function updateTimer () {
     timer.textContent = formatSeconds(seconds);
 }
 
+//This section does everything that has to do the timers
 function changeTimer () {
-    if (secondsTimer === 1500) {        
+    if (breakTimer === 4) {
+        breakTimer = 0;
+        clearInterval(intervalBigTimer);
+        seconds = 10;
+        secondsTimer = 900;
+        running = false;
+        startPauseButton.textContent = "S t a r t";
+        timer.textContent = "15:00";
+        nextTimer.textContent = "25:00";
+        changeSound();
+    } else if (secondsTimer === 1500) {        
         clearInterval(intervalBigTimer);
         seconds = 300;
         secondsTimer = 300;
@@ -28,15 +41,24 @@ function changeTimer () {
         startPauseButton.textContent = "S t a r t";
         timer.textContent = "5:00";
         nextTimer.textContent = "25:00";
-    } else if (secondsTimer === 300) {
+        changeSound();
+    } else if (secondsTimer === 300 || secondsTimer === 900) {
         clearInterval(intervalBigTimer);
         seconds = 1500;
         secondsTimer = 1500;
         running = false;
         startPauseButton.textContent = "S t a r t";
-        nextTimer.textContent = "5:00";
         timer.textContent = "25:00";
+        nextTimer.textContent = "5:00";
+        breakTimer++;
+        changeSound();
     }
+}
+
+function changeSound() {
+    ringSound.currentTime = 0;
+    ringSound.volume = 1;
+    ringSound.play();
 }
 
 function formatSeconds () {
@@ -52,7 +74,7 @@ function leftZero (number) {
 //This function is for start and stop the timer 
 function startBigTimer () {
     if (!running) {
-        intervalBigTimer = setInterval(function () {updateTimer(seconds)}, 1000);
+        intervalBigTimer = setInterval(updateTimer, 1000);
         running = true;
     } else {
         clearInterval(intervalBigTimer);
@@ -68,8 +90,10 @@ function resetBigTimer () {
     seconds = secondsTimer;
     if (secondsTimer === 1500) {
         timer.textContent = "25:00";
-    } else {
+    } else if (secondsTimer === 300) {
         timer.textContent = "5:00";
+    } else if (secondsTimer === 900) {
+        timer.textContent = "15:00";
     }
     
 }
