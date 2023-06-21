@@ -4,6 +4,7 @@ const startPauseButton = document.getElementById("pausa-start");
 const resetButton = document.getElementById("reset");
 const skipButton = document.getElementById("skip");
 const ringSound = document.getElementById("ringSound");
+const counterContainer = document.getElementById("counterContainer");
 
 let seconds = 1500; 
 let intervalBigTimer;
@@ -21,46 +22,40 @@ function updateTimer () {
     timer.textContent = formatSeconds(seconds);
 }
 
-//This section does everything that has to do the timers
-function changeTimer () {
+//change between the work time and the break time
+function changeTimer () { 
+    changeSound();
     if (breakTimer === 4) {
         breakTimer = 0;
-        clearInterval(intervalBigTimer);
         seconds = 10;
         secondsTimer = 900;
-        running = false;
-        startPauseButton.textContent = "S t a r t";
         timer.textContent = "15:00";
-        nextTimer.textContent = "25:00";
-        changeSound();
     } else if (secondsTimer === 1500) {        
-        clearInterval(intervalBigTimer);
         seconds = 300;
         secondsTimer = 300;
-        running = false;
-        startPauseButton.textContent = "S t a r t";
         timer.textContent = "5:00";
-        nextTimer.textContent = "25:00";
-        changeSound();
     } else if (secondsTimer === 300 || secondsTimer === 900) {
-        clearInterval(intervalBigTimer);
         seconds = 1500;
         secondsTimer = 1500;
-        running = false;
-        startPauseButton.textContent = "S t a r t";
         timer.textContent = "25:00";
         nextTimer.textContent = "5:00";
         breakTimer++;
-        changeSound();
     }
+    running = false;        
+    startPauseButton.textContent = "S t a r t";        
+    nextTimer.textContent = "25:00";        
+    clearInterval(intervalBigTimer);
+    changeColor(secondsTimer);
 }
 
+//play the alarm for the end
 function changeSound() {
     ringSound.currentTime = 0;
     ringSound.volume = 1;
     ringSound.play();
 }
 
+//convert and represent the minutes and seconds
 function formatSeconds () {
     let minutes = Math.floor(seconds / 60);
     let secondsInMinute = seconds % 60;
@@ -71,23 +66,26 @@ function leftZero (number) {
     return number < 10 ? "0" + number : number;
 }
 
-//This function is for start and stop the timer 
+//start and stop the timer 
 function startBigTimer () {
-    if (!running) {
+    if (!running) {        
         intervalBigTimer = setInterval(updateTimer, 1000);
-        running = true;
+        running = true;        
+        changeColor(secondsTimer);
     } else {
         clearInterval(intervalBigTimer);
         running = false;
+        changeColor(secondsTimer);
     }
 }
 
-//This function its given to a button to reset the timer 
+//This function reset the timer 
 function resetBigTimer () {
     clearInterval(intervalBigTimer);
     running = false;
     startPauseButton.textContent = "S t a r t";
     seconds = secondsTimer;
+    changeColor(secondsTimer);
     if (secondsTimer === 1500) {
         timer.textContent = "25:00";
     } else if (secondsTimer === 300) {
@@ -95,7 +93,19 @@ function resetBigTimer () {
     } else if (secondsTimer === 900) {
         timer.textContent = "15:00";
     }
-    
+}
+
+function changeColor(stageSeconds) {
+    if (!running) {
+        counterContainer.style.borderColor = "rgba(156, 156, 156, 1)"; 
+        counterContainer.style.boxShadow = "inset 0px 0px 39px 32px rgba(255, 255, 255, 0.44)";
+    } else if (stageSeconds === 1500) {
+        counterContainer.style.borderColor = "rgba(255, 0, 0, 0.8)";
+        counterContainer.style.boxShadow = "inset 0px 0px 39px 32px rgba(255, 0, 0, 0.20)";
+    } else if (stageSeconds === 300 || stageSeconds === 900) {
+        counterContainer.style.borderColor = "rgba(0, 92, 224, 0.8)";
+        counterContainer.style.boxShadow = "inset 0px 0px 39px 32px rgba(0, 92, 224, 0.20)";
+    }
 }
 
 startPauseButton.addEventListener('click', startBigTimer);
@@ -108,5 +118,5 @@ startPauseButton.addEventListener('click', function () {
     }
 })
 resetButton.addEventListener('click', resetBigTimer);
-skipButton.addEventListener('click', changeTimer)
+skipButton.addEventListener('click', changeTimer);
 
