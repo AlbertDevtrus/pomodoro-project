@@ -6,6 +6,11 @@ const skipButton = document.getElementById("skip");
 const ringSound = document.getElementById("ringSound");
 const counterContainer = document.getElementById("counterContainer");
 
+//todolist buttons
+const addGoal = document.getElementById("addGoal");
+const inputGoal = document.getElementById("inputGoal");
+const todolist = document.getElementById("todolist");
+
 let seconds = 1500; 
 let intervalBigTimer;
 let running = false;
@@ -27,23 +32,29 @@ function changeTimer () {
     changeSound();
     if (breakTimer === 4) {
         breakTimer = 0;
-        seconds = 10;
+        seconds = 900;
         secondsTimer = 900;
         timer.textContent = "15:00";
+        nextTimer.textContent = "25:00";
     } else if (secondsTimer === 1500) {        
         seconds = 300;
         secondsTimer = 300;
         timer.textContent = "5:00";
+        nextTimer.textContent = "25:00";
     } else if (secondsTimer === 300 || secondsTimer === 900) {
         seconds = 1500;
         secondsTimer = 1500;
         timer.textContent = "25:00";
-        nextTimer.textContent = "5:00";
         breakTimer++;
+        if (breakTimer === 4) {
+            nextTimer.textContent = "15:00";
+        } else {
+            nextTimer.textContent = "5:00";
+
+        }
     }
     running = false;        
     startPauseButton.textContent = "S t a r t";        
-    nextTimer.textContent = "25:00";        
     clearInterval(intervalBigTimer);
     changeColor(secondsTimer);
 }
@@ -120,3 +131,63 @@ startPauseButton.addEventListener('click', function () {
 resetButton.addEventListener('click', resetBigTimer);
 skipButton.addEventListener('click', changeTimer);
 
+//todo list functions
+
+function createGoal() {
+    const descriptionGoal = inputGoal.value;
+    todolist.style.display = "flex";
+    if (descriptionGoal.trim() !== "") {        
+        const listItem = document.createElement("li");
+        const goalItem = document.createElement("div");
+        goalItem.setAttribute("id", "goalItem");
+        listItem.textContent = descriptionGoal;
+        goalItem.appendChild(createCheck());        
+        goalItem.appendChild(listItem);
+        goalItem.appendChild(createEdit());
+        goalItem.appendChild(createDelete());        
+        todolist.appendChild(goalItem);
+        inputGoal.value = "";
+    }        
+    todolist.style.display = "flex";
+}
+
+function createCheck() {
+    const completeGoal = document.createElement("button");
+    completeGoal.setAttribute("id", "completeGoal");
+    completeGoal.setAttribute("class", "buttonsGoal");
+    const iconCheck = document.createElement("i");
+    iconCheck.setAttribute("class", "fa-solid fa-check");
+    completeGoal.appendChild(iconCheck);
+    return completeGoal;
+}
+
+function createDelete() {
+    const deleteGoal = document.createElement("button");
+    deleteGoal.setAttribute("id", "deleteGoal");
+    deleteGoal.setAttribute("class", "buttonsGoal");
+    const iconDelete = document.createElement("i");
+    iconDelete.setAttribute("class", "fa-solid fa-trash");
+    deleteGoal.appendChild(iconDelete);
+    return deleteGoal;
+}
+
+function createEdit() {
+    const editGoal = document.createElement("button");
+    editGoal.setAttribute("id", "editGoal");
+    editGoal.setAttribute("class", "buttonsGoal");
+    const iconEdit = document.createElement("i");
+    iconEdit.setAttribute("class", "fa-solid fa-pen-to-square");
+    editGoal.appendChild(iconEdit);
+    return editGoal;
+}
+
+addGoal.addEventListener("click", createGoal);
+inputGoal.addEventListener("keypress", function(event) {
+    if (event.keyCode === 13) {
+        createGoal();
+    }
+})
+
+
+
+//terminar el delete y los botones con el setAtribbute
