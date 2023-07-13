@@ -1,3 +1,4 @@
+const themeButton = document.getElementById("themeButton");
 const timer = document.getElementById("timer");
 const nextTimer = document.getElementById("nextTimer");
 const startPauseButton = document.getElementById("pausa-start");
@@ -19,6 +20,30 @@ let intervalNextTimer;
 let secondsTimer = 1500;
 let breakTimer = 1;
 let goalsCompleted = 0;
+let darkTheme = false;
+
+//change the theme of the page
+function changeTheme () {
+    if (!darkTheme) {        
+        document.documentElement.style.setProperty("--fontColor", "white");
+        document.documentElement.style.setProperty("--backgroundColorGray", "#000000");
+        document.documentElement.style.setProperty("--borderColor", "#4A4A4A");
+        document.documentElement.style.setProperty("--backgroundColorWhite", "#101010");
+        document.documentElement.style.setProperty("--hoverBackground", "#ececec");
+        document.documentElement.style.setProperty("--hoverColor", "black");
+        document.documentElement.style.setProperty("--counterBackground", "#000000");
+        darkTheme = true;
+    } else {
+        document.documentElement.style.setProperty("--fontColor", "rgb(34, 34, 34)");
+        document.documentElement.style.setProperty("--backgroundColorGray", "rgba(206, 206, 206, 0.452)");
+        document.documentElement.style.setProperty("--borderColor", "rgba(156, 156, 156, 1)");
+        document.documentElement.style.setProperty("--backgroundColorWhite", "#ececec");
+        document.documentElement.style.setProperty("--hoverBackground", "#080808");
+        document.documentElement.style.setProperty("--hoverColor", "white");
+        document.documentElement.style.setProperty("--counterBackground", "#DDDDDD");   
+        darkTheme = false;
+    }
+}
 
 function updateTimer () {
     if (seconds === 0) {
@@ -122,6 +147,7 @@ function changeColor(stageSeconds) {
     }
 }
 
+themeButton.addEventListener('click', changeTheme);
 startPauseButton.addEventListener('click', startBigTimer);
 // Change the text from the button pausa-start
 startPauseButton.addEventListener('click', function () {
