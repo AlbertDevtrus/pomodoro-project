@@ -6,10 +6,11 @@ const skipButton = document.getElementById("skip");
 const ringSound = document.getElementById("ringSound");
 const counterContainer = document.getElementById("counterContainer");
 
-//todolist buttons
 const addGoal = document.getElementById("addGoal");
 const inputGoal = document.getElementById("inputGoal");
 const todolist = document.getElementById("todolist");
+const counterGoals = document.getElementById("goalsCompleted");
+const listItem = document.querySelectorAll(".listItem");
 
 let seconds = 1500; 
 let intervalBigTimer;
@@ -17,6 +18,7 @@ let running = false;
 let intervalNextTimer;
 let secondsTimer = 1500;
 let breakTimer = 1;
+let goalsCompleted = 0;
 
 function updateTimer () {
     if (seconds === 0) {
@@ -106,6 +108,7 @@ function resetBigTimer () {
     }
 }
 
+//change the color of the count
 function changeColor(stageSeconds) {
     if (!running) {
         counterContainer.style.borderColor = "rgba(156, 156, 156, 1)"; 
@@ -140,6 +143,7 @@ function createGoal() {
         const listItem = document.createElement("li");
         const goalItem = document.createElement("div");
         goalItem.setAttribute("id", "goalItem");
+        listItem.setAttribute("class", "listItem")
         listItem.textContent = descriptionGoal;
         goalItem.appendChild(createCheck());        
         goalItem.appendChild(listItem);
@@ -155,19 +159,33 @@ function createCheck() {
     const completeGoal = document.createElement("button");
     completeGoal.setAttribute("id", "completeGoal");
     completeGoal.setAttribute("class", "buttonsGoal");
+    //class for the visual icon
     const iconCheck = document.createElement("i");
     iconCheck.setAttribute("class", "fa-solid fa-check");
     completeGoal.appendChild(iconCheck);
+    //we create the eveb listener insibe because the DOM register the button
+    completeGoal.addEventListener("click", () => {
+        goalsCompleted++;
+        counterGoals.textContent = goalsCompleted;
+        const item = completeGoal.parentNode;
+        item.remove();
+    })
     return completeGoal;
 }
 
 function createDelete() {
     const deleteGoal = document.createElement("button");
-    deleteGoal.setAttribute("id", "deleteGoal");
     deleteGoal.setAttribute("class", "buttonsGoal");
+    deleteGoal.setAttribute("id", "deleteGoal");
+    //class for the visual icon
     const iconDelete = document.createElement("i");
     iconDelete.setAttribute("class", "fa-solid fa-trash");
     deleteGoal.appendChild(iconDelete);
+    //we create the event listener inside because we need that the DOM register the buttons
+    deleteGoal.addEventListener("click", () => {
+        const item = deleteGoal.parentNode;
+        item.remove();
+    })
     return deleteGoal;
 }
 
@@ -175,19 +193,24 @@ function createEdit() {
     const editGoal = document.createElement("button");
     editGoal.setAttribute("id", "editGoal");
     editGoal.setAttribute("class", "buttonsGoal");
+    //class for the visual icon
     const iconEdit = document.createElement("i");
     iconEdit.setAttribute("class", "fa-solid fa-pen-to-square");
     editGoal.appendChild(iconEdit);
+    //we create the event listener inside because we need that the DOM register the buttons
+    editGoal.addEventListener("click", () => {
+        const content = editGoal.previousElementSibling;
+        inputGoal.value = content.textContent;
+        const item = editGoal.parentNode;
+        item.remove();
+    })
     return editGoal;
 }
 
+//call the function to create a goal using the add button or pressing the enter key in the input
 addGoal.addEventListener("click", createGoal);
 inputGoal.addEventListener("keypress", function(event) {
     if (event.keyCode === 13) {
         createGoal();
     }
 })
-
-
-
-//terminar el delete y los botones con el setAtribbute
