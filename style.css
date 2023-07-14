@@ -7,6 +7,7 @@
     --hoverBackground: #080808;
     --hoverColor: white;
     --counterBackground: #DDDDDD;
+    --gradientList: rgba(160, 160, 160, 0.4);
 }
 
 button {
@@ -123,8 +124,8 @@ body {
     font-family: Raleway, 'sans-serif';
     font-size: 18px;
     font-weight: bolder;
-    color: rgb(34, 34, 34);
-    background-color: rgba(206, 206, 206, 0.452);
+    color: var(--fontColor);
+    background-color: var(--backgroundColorGray);
     opacity: 0.8;
     border: 0;
     user-select: none;
@@ -167,6 +168,22 @@ body {
     color: var(--hoverColor);    
 }
 
+@media (max-width: 600px) {
+    #container-btns {
+        border-radius: 34px;
+        height: 100px;
+        flex-direction: column;
+    }
+
+    #pausa-start {
+        border-radius: 50px 50px 0px 0px;
+    }
+    
+    #skip {
+        border-radius: 0px 0px 50px 50px;
+    }
+}
+
 /*Here begins the todolist style*/
 
 #todolist-container {
@@ -188,10 +205,11 @@ body {
     font-size: 20px;
     font-family: Raleway, 'Roboto Condensed';
     font-weight: bolder;
-    background: linear-gradient(to right, var(--backgroundColorWhite), rgba(160, 160, 160, 0.4), var(--backgroundColorWhite));
+    background: linear-gradient(to right, var(--backgroundColorWhite), var(--gradientList), var(--backgroundColorWhite));
     border-top: 1px solid var(--borderColor);
     border-bottom: 1px solid var(--borderColor);
     border-radius: 40px 40px 0px 0px;
+    color: var(--fontColor);
 }
 
 #addGoal {
@@ -205,10 +223,11 @@ body {
     cursor: pointer;
     transition: all 0.4s ease;
     user-select: none;
-    background: linear-gradient(to right, var(--backgroundColorWhite), rgba(160, 160, 160, 0.4), var(--backgroundColorWhite));
+    background: linear-gradient(to right, var(--backgroundColorWhite), var(--gradientList), var(--backgroundColorWhite));
     border-top: 1px solid var(--borderColor);
     border-bottom: 1px solid var(--borderColor);
     border-radius: 0px 0px 40px 40px;
+    color: var(--fontColor);
 }
 
 #addGoal:hover {

@@ -32,6 +32,7 @@ function changeTheme () {
         document.documentElement.style.setProperty("--hoverBackground", "#ececec");
         document.documentElement.style.setProperty("--hoverColor", "black");
         document.documentElement.style.setProperty("--counterBackground", "#000000");
+        document.documentElement.style.setProperty("--gradientList", "#1e1e1e")
         darkTheme = true;
     } else {
         document.documentElement.style.setProperty("--fontColor", "rgb(34, 34, 34)");
@@ -40,7 +41,8 @@ function changeTheme () {
         document.documentElement.style.setProperty("--backgroundColorWhite", "#ececec");
         document.documentElement.style.setProperty("--hoverBackground", "#080808");
         document.documentElement.style.setProperty("--hoverColor", "white");
-        document.documentElement.style.setProperty("--counterBackground", "#DDDDDD");   
+        document.documentElement.style.setProperty("--counterBackground", "#DDDDDD"); 
+        document.documentElement.style.setProperty("--gradientList", "rgba(160, 160, 160, 0.4)")  
         darkTheme = false;
     }
 }
