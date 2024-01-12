@@ -12,6 +12,7 @@ const inputGoal = document.getElementById("inputGoal");
 const todolist = document.getElementById("todolist");
 const counterGoals = document.getElementById("goalsCompleted");
 const listItem = document.querySelectorAll(".listItem");
+const favicon = document.querySelector("#favicon");
 
 let seconds = 1500; 
 let intervalBigTimer;
@@ -140,10 +141,13 @@ function changeColor(stageSeconds) {
     if (!running) {
         counterContainer.style.borderColor = "rgba(156, 156, 156, 1)"; 
         counterContainer.style.boxShadow = "inset 0px 0px 39px 32px rgba(255, 255, 255, 0.44)";
+        favicon.href = "/styles/favicon-neutral.svg";
     } else if (stageSeconds === 1500) {
         counterContainer.style.borderColor = "rgba(255, 0, 0, 0.8)";
         counterContainer.style.boxShadow = "inset 0px 0px 39px 32px rgba(255, 0, 0, 0.20)";
+        favicon.href = "/styles/favicon-work.svg";
     } else if (stageSeconds === 300 || stageSeconds === 900) {
+        favicon.href = "/styles/favicon-rest.svg";
         counterContainer.style.borderColor = "rgba(0, 92, 224, 0.8)";
         counterContainer.style.boxShadow = "inset 0px 0px 39px 32px rgba(0, 92, 224, 0.20)";
     }
