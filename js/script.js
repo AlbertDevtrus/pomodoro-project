@@ -168,26 +168,25 @@ skipButton.addEventListener('click', changeTimer);
 
 function createGoal() {
     const descriptionGoal = inputGoal.value;
-    todolist.style.display = "flex";
     if (descriptionGoal.trim() !== "") {
         const goalItem = document.createElement("li");
-        goalItem.setAttribute("id", "goalItem");
-        listItem.setAttribute("class", "listItem")
-        listItem.textContent = descriptionGoal;
+        const description = document.createElement('span');
+        description.textContent = descriptionGoal;
         const check = createCheck();
-        check.textContent = 'C';
-        goalItem.appendChild(check);        
-        goalItem.appendChild(listItem);
         const edit = createEdit();
-        edit.textContent = 'E';
-        goalItem.appendChild(edit);
         const deleter = createDelete();
+        check.textContent = 'C';
+        edit.textContent = 'E';
         deleter.textContent = 'D';
-        goalItem.appendChild(deleter);        
+        goalItem.appendChild(check);
+        goalItem.appendChild(description);
+        goalItem.appendChild(edit);
+        goalItem.appendChild(deleter);
+
+        goalItem.setAttribute("id", "goal-item");
         todolist.appendChild(goalItem);
         inputGoal.value = "";
     }        
-    todolist.style.display = "flex";
 }
 
 function createCheck() {
