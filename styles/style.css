@@ -261,12 +261,15 @@ body {
 
 
 #todolist {
+    display: flex;
+    flex-direction: column;
     list-style: none;
     width: 100%;
     height: 100%;
     margin: 20px 0px 0px 0px;
     padding: 10px;
     font-size: 1rem;
+    gap: 10px;
 }
 
 #goal-item {

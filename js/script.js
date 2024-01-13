@@ -1,16 +1,16 @@
-const themeButton = document.getElementById("themeButton");
-const timer = document.getElementById("timer");
-const nextTimer = document.getElementById("nextTimer");
-const startPauseButton = document.getElementById("pausa-start");
-const resetButton = document.getElementById("reset");
-const skipButton = document.getElementById("skip");
-const ringSound = document.getElementById("ringSound");
-const counterContainer = document.getElementById("counterContainer");
+const themeButton = document.querySelector("#themeButton");
+const timer = document.querySelector("#timer");
+const nextTimer = document.querySelector("#nextTimer");
+const startPauseButton = document.querySelector("#pausa-start");
+const resetButton = document.querySelector("#reset");
+const skipButton = document.querySelector("#skip");
+const ringSound = document.querySelector("#ringSound");
+const counterContainer = document.querySelector("#counterContainer");
 
 const addGoal = document.querySelector("#add-goal");
 const inputGoal = document.querySelector("#input-goal");
-const todolist = document.getElementById("todolist");
-const counterGoals = document.getElementById("goalsCompleted");
+const todolist = document.querySelector("#todolist");
+const counterGoals = document.querySelector("#goalsCompleted");
 const listItem = document.querySelectorAll(".listItem");
 const favicon = document.querySelector("#favicon");
 
@@ -125,13 +125,7 @@ function resetBigTimer () {
     startPauseButton.textContent = "S t a r t";
     seconds = secondsTimer;
     changeColor(secondsTimer);
-    if (secondsTimer === 1500) {
-        timer.textContent = "25:00";
-    } else if (secondsTimer === 300) {
-        timer.textContent = "5:00";
-    } else if (secondsTimer === 900) {
-        timer.textContent = "15:00";
-    }
+    timer.textContent = formatSeconds(secondsTimer);
 }
 
 //change the color of the count
@@ -153,7 +147,6 @@ function changeColor(stageSeconds) {
 
 themeButton.addEventListener('click', changeTheme);
 startPauseButton.addEventListener('click', startBigTimer);
-// Change the text from the button pausa-start
 startPauseButton.addEventListener('click', function () {
     if (startPauseButton.textContent === "S t a r t") {
         startPauseButton.textContent = "P a u s e";
@@ -197,7 +190,6 @@ function createCheck() {
     const iconCheck = document.createElement("i");
     iconCheck.setAttribute("class", "fa-solid fa-check");
     completeGoal.appendChild(iconCheck);
-    //we create the event listener insibe because the DOM register the button
     completeGoal.addEventListener("click", () => {
         goalsCompleted++;
         counterGoals.textContent = goalsCompleted;
@@ -209,13 +201,12 @@ function createCheck() {
 
 function createDelete() {
     const deleteGoal = document.createElement("button");
-    deleteGoal.setAttribute("class", "buttonsGoal");
     deleteGoal.setAttribute("id", "deleteGoal");
+    deleteGoal.setAttribute("class", "buttonsGoal");
     //class for the visual icon
     const iconDelete = document.createElement("i");
     iconDelete.setAttribute("class", "fa-solid fa-trash");
     deleteGoal.appendChild(iconDelete);
-    //we create the event listener inside because we need that the DOM register the buttons
     deleteGoal.addEventListener("click", () => {
         const item = deleteGoal.parentNode;
         item.remove();
@@ -231,7 +222,6 @@ function createEdit() {
     const iconEdit = document.createElement("i");
     iconEdit.setAttribute("class", "fa-solid fa-pen-to-square");
     editGoal.appendChild(iconEdit);
-    //we create the event listener inside because we need that the DOM register the buttons
     editGoal.addEventListener("click", () => {
         const content = editGoal.previousElementSibling;
         inputGoal.value = content.textContent;
@@ -241,5 +231,4 @@ function createEdit() {
     return editGoal;
 }
 
-//call the function to create a goal using the add button or pressing the enter key in the input
 addGoal.addEventListener("click", createGoal);
