@@ -7,8 +7,8 @@ const skipButton = document.getElementById("skip");
 const ringSound = document.getElementById("ringSound");
 const counterContainer = document.getElementById("counterContainer");
 
-const addGoal = document.getElementById("addGoal");
-const inputGoal = document.getElementById("inputGoal");
+const addGoal = document.querySelector("#add-goal");
+const inputGoal = document.querySelector("#input-goal");
 const todolist = document.getElementById("todolist");
 const counterGoals = document.getElementById("goalsCompleted");
 const listItem = document.querySelectorAll(".listItem");
@@ -30,8 +30,6 @@ function changeTheme () {
         document.documentElement.style.setProperty("--backgroundColorGray", "#000000");
         document.documentElement.style.setProperty("--borderColor", "#4A4A4A");
         document.documentElement.style.setProperty("--backgroundColorWhite", "#101010");
-        document.documentElement.style.setProperty("--hoverBackground", "#ececec");
-        document.documentElement.style.setProperty("--hoverColor", "black");
         document.documentElement.style.setProperty("--counterBackground", "#000000");
         document.documentElement.style.setProperty("--gradientList", "#1e1e1e")
         darkTheme = true;
@@ -162,7 +160,7 @@ startPauseButton.addEventListener('click', function () {
     } else {
         startPauseButton.textContent = "S t a r t";
     }
-})
+});
 resetButton.addEventListener('click', resetBigTimer);
 skipButton.addEventListener('click', changeTimer);
 
@@ -171,16 +169,21 @@ skipButton.addEventListener('click', changeTimer);
 function createGoal() {
     const descriptionGoal = inputGoal.value;
     todolist.style.display = "flex";
-    if (descriptionGoal.trim() !== "") {        
-        const listItem = document.createElement("li");
-        const goalItem = document.createElement("div");
+    if (descriptionGoal.trim() !== "") {
+        const goalItem = document.createElement("li");
         goalItem.setAttribute("id", "goalItem");
         listItem.setAttribute("class", "listItem")
         listItem.textContent = descriptionGoal;
-        goalItem.appendChild(createCheck());        
+        const check = createCheck();
+        check.textContent = 'C';
+        goalItem.appendChild(check);        
         goalItem.appendChild(listItem);
-        goalItem.appendChild(createEdit());
-        goalItem.appendChild(createDelete());        
+        const edit = createEdit();
+        edit.textContent = 'E';
+        goalItem.appendChild(edit);
+        const deleter = createDelete();
+        deleter.textContent = 'D';
+        goalItem.appendChild(deleter);        
         todolist.appendChild(goalItem);
         inputGoal.value = "";
     }        
@@ -195,7 +198,7 @@ function createCheck() {
     const iconCheck = document.createElement("i");
     iconCheck.setAttribute("class", "fa-solid fa-check");
     completeGoal.appendChild(iconCheck);
-    //we create the eveb listener insibe because the DOM register the button
+    //we create the event listener insibe because the DOM register the button
     completeGoal.addEventListener("click", () => {
         goalsCompleted++;
         counterGoals.textContent = goalsCompleted;
@@ -241,8 +244,3 @@ function createEdit() {
 
 //call the function to create a goal using the add button or pressing the enter key in the input
 addGoal.addEventListener("click", createGoal);
-inputGoal.addEventListener("keypress", function(event) {
-    if (event.keyCode === 13) {
-        createGoal();
-    }
-})

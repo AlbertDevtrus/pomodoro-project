@@ -31,13 +31,15 @@
     </div>
     <!--Probablemente quieras agregar un boton para subir o bajar el audio-->
     <div id="todolist-container">
-        <h2 id="headerTodolist">G O A L S</h2>
+        <h2 id="header-todolist">Goals</h2>
         <div id="container-goal">             
-            <input type="text" id="inputGoal" placeholder="Finish my homework!" maxlength="65">            
+            <div>
+                <input type="text" id="input-goal" placeholder="Finish my homework!" maxlength="65">            
+                <button id="add-goal"><i class="fa-solid fa-plus"></i>X</button>
+            </div>
             <ul id="todolist">
             </ul>
         </div>
-        <button id="addGoal"><i class="fa-solid fa-plus"></i></button>
     </div>
     <div id="counterGoals">
         You have completed <span id="goalsCompleted">0</span> goals.
