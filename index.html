@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A minimalist pomodoro timer to focus on the work/study and nothing more." >
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,12 +18,12 @@
 <body>
     <header>
         <div id="theme">
-            <button id="themeButton">Dark Theme</button>
+            <button id="theme-button">Dark Theme</button>
         </div>
     </header>
-    <div id="counterContainer">
+    <div id="counter-container">
         <div id="timer">25:00</div>
-        <div id="nextTimer">05:00</div>
+        <div id="next-timer">05:00</div>
     </div>
     <div id="container-btns">
         <button class="btn-count" id="pausa-start">S t a r t</button>
@@ -35,24 +36,24 @@
         <div id="container-goal">             
             <div>
                 <input type="text" id="input-goal" placeholder="Finish my homework!" maxlength="65">            
-                <button id="add-goal"><i class="fa-solid fa-plus"></i>X</button>
+                <button id="add-goal"><i class="fa-solid fa-plus"></i></button>
             </div>
             <ul id="todolist">
 
                 <li id="goal-item">
-                    <input id="completeGoal" class="buttonsGoal" type="checkbox" value="C">
+                    <input id="complete-goal" class="buttons-goal" type="checkbox">
                     <span>Una meta a alcanzar</span>
-                    <button id="editGoal" class="buttonsGoal">E</button>
-                    <button class="buttonsGoal" id="deleteGoal">D</button>
+                    <button id="edit-goal" class="buttons-goal"></button>
+                    <button class="buttons-goal" id="delete-goal"></button>
                 </li>
                 
             </ul>
         </div>
     </div>
-    <div id="counterGoals">
-        You have completed <span id="goalsCompleted">0</span> goals.
+    <div id="counter-goals">
+        You have completed <span id="goals-completed">0</span> goals.
     </div>
-    <audio id="ringSound" src="sounds/ringtone-1-46486.mp3" ></audio>
+    <audio id="ring-sound" src="sounds/ringtone-1-46486.mp3" ></audio>
     <script src="/js/script.js"></script>
 </body>
 </html>

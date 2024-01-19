@@ -1,13 +1,17 @@
 :root {
-    --colorShadows: #0B7FC4;
-    --fontColor: rgb(34, 34, 34);
-    --backgroundColorGray: rgba(206, 206, 206, 0.452);
-    --borderColor: rgba(156, 156, 156, 1);
-    --backgroundColorWhite: #ececec;
-    --hoverBackground: #080808;
-    --hoverColor: white;
-    --counterBackground: #DDDDDD;
-    --gradientList: rgba(160, 160, 160, 0.4);
+    --black: black;
+    --gray1: rgba(156, 156, 156, 1);
+    
+    --white: white;
+
+    --blue1: #bde4fb;
+    --blue2: #75c4f8;
+    --blue3: rgb(0, 92, 224);
+    --blue4: #1875b3;
+    --background-white: #f7fafc;
+
+    --green: rgb(0, 189, 60);
+    --red: rgb(255, 0, 0);
 }
 
 button {
@@ -22,42 +26,39 @@ body {
     padding: 0;
     justify-content: center;
     align-items: center;
-    background-color: var(--backgroundColorWhite);
     box-sizing: border-box;
+    background-color: var(--background-white);
 }
 
-#themeButton {
+#theme-button {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-    background-color: white;
     height: 30px;
     width: 30vw;
     opacity: 0.8;
     border: 0;
     border-radius: 50px;
-    border: 1px solid var(--borderColor);
-    box-shadow: 1px 1px 10px 0px rgba(32, 32, 32, 0.6);
     font-family: Raleway, 'sans-serif';
     font-size: 18px;
     font-weight: bolder;
     cursor: pointer;
     user-select: none;
     transition: all 0.4s ease;
+    padding: 20px;
+    background-color: var(--blue1);
 }
 
-#themeButton:hover {
-    background-color: var(--hoverBackground);
-    color: var(--hoverColor);
-    box-shadow: 2px 2px 8px #03314d;
-    border: 1px solid black;
+#theme-button:hover {
+    background-color: var(--blue4);
+    color: var(--white);
 } 
 
-#counterContainer {
+#counter-container {
     margin: 73px 0;
-    background-color: var(--counterBackground);
-    color: var(--fontColor);
+    background-color: var(--background-white);
+    color: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -66,13 +67,12 @@ body {
     height: 18vw;
     border-radius: 50%;
     padding: 100px;
-    border: 1px solid rgba(11, 127, 196, 0.9);
-    box-shadow: inset 0px 0px 39px 32px rgba(255, 255, 255, 0.44);
+    box-shadow: inset 0px 0px 39px 0px var(--blue1);
     font-family: 'Roboto Condensed', sans-serif;
     max-width: 150px;
     max-height: 150px;
     gap: 30px;
-    border: 10px solid var(--borderColor);
+    border: 10px solid var(--blue2);
     transition: all 0.4s ease;
 }
 
@@ -84,7 +84,7 @@ body {
     text-shadow: 4px 10px 11px rgba(0, 0, 0, 0.25);
 }
 
-#nextTimer {
+#next-timer {
     font-size: 30px;
     opacity: 0.8;
     user-select: none;
@@ -97,7 +97,7 @@ body {
         font-size: 65px;
     }
 
-    #nextTimer {
+    #next-timer {
         font-size: 24px;
     }
 }
@@ -107,8 +107,6 @@ body {
     width: 60vw;
     height: 8vw;
     border-radius: 50px;
-    border: 1px solid var(--borderColor);
-    box-shadow: 1px 1px 10px 0px rgba(32, 32, 32, 0.6);
 }
 
 @media (min-width: 600px) {
@@ -123,8 +121,7 @@ body {
     font-family: Raleway, 'sans-serif';
     font-size: 18px;
     font-weight: bolder;
-    background-color: white;
-    opacity: 0.8;
+    background-color: var(--blue1);
     border: 0;
     user-select: none;
     transition: all 0.4s ease;
@@ -137,9 +134,9 @@ body {
 }
 
 .btn-count:hover {
-    background-color: var(--hoverBackground);
+    background-color: var(--blue4);
     box-shadow: 2px 2px 8px #03314d;
-    color: var(--hoverColor);    
+    color: var(--white);    
     cursor: pointer;
 }
 
@@ -152,18 +149,18 @@ body {
 }
 
 #pausa-start:active {
-    background-color: rgb(0, 189, 60);
-    color: var(--hoverColor);    
+    background-color: var(--green);
+    color: var(--white);    
 }
 
 #reset:active {
-    background-color: rgb(255, 0, 0);
-    color: var(--hoverColor);    
+    background-color: var(--red);
+    color: var(--white);    
 }
 
 #skip:active {
-    background-color: rgb(0, 92, 224);
-    color: var(--hoverColor);    
+    background-color: var(--blue3);
+    color: var(--white);    
 }
 
 @media (max-width: 600px) {
@@ -188,18 +185,18 @@ body {
     display: flex;
     flex-direction: column;
     margin: 40px auto;
-    background-color: var(--backgroundColorWhite);
-    color: var(--fontColor);
+    background-color: var(--blue2);
     width: 50vw;
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0px 10px 20px 1px var(--borderColor);
+    transition: all 0.3s ease;
 }
 
 #header-todolist {
     font-family: Raleway, 'sans-serif';
     font-size: 2rem;
     margin-bottom: 10px;
+    color: black;
 }
 
 #container-goal {
@@ -218,7 +215,7 @@ body {
 }
 
 #input-goal {
-    border: 1px solid var(--borderColor);
+    border: 1px solid transparent;
     border-radius: 10px;
     padding: 10px;
     width: 80%;
@@ -230,26 +227,25 @@ body {
 }
 
 #input-goal:focus {
-    border: 1px solid var(--colorShadows);
+    border: 2px solid var(--blue3);
 }
 
 #add-goal {
-    box-shadow: 0px 0px 0px 1px var(--borderColor);
     background-color: white;
-    border-radius: 10px;
+    border: 1px solid transparent;
+    border-radius: 20px;
     flex: 1;
     font-size: 1rem;
     padding: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
+    border: 0;
 }
 
 #add-goal:hover {
     opacity: 0.8;
-    border: 0;
-    background-color: var(--hoverBackground);
-    box-shadow: 2px 2px 8px #03314d;
-    color: var(--hoverColor);
+    background-color: var(--blue4);
+    color: var(--white);
 }
 
 #add-goal:active {
@@ -279,13 +275,11 @@ body {
     padding: 15px;
     border-radius: 15px;
     background-color: white;
-    box-shadow: 0px 0px 10px 0px var(--borderColor);
 }
 
-.buttonsGoal {
-    border: 2px solid var(--borderColor);
+.buttons-goal {
+    border: 2px solid var(--gray1);
     border-radius: 50%;
-    box-shadow: 0px 0px 5px 0px var(--borderColor);
     padding: 2px 5px 2px 5px;
     font-size: 1rem;
     cursor: pointer;
@@ -293,113 +287,60 @@ body {
     transition: all 0.3s ease;
 }
 
-#editGoal:hover {
+
+
+
+
+
+
+
+/* arreglar selector para que cambie el span cuando hace check */
+#complete-goal:checked ~ #goal-item span {
+    opacity: 0.5;
+}
+
+#complete-goal {
+    accent-color: var(--green);
+}
+
+#edit-goal:hover {
     background: none;
-    color: var(--hoverColor);
-    background-color: rgb(0, 92, 224);
-    border: 2px solid rgb(0, 92, 224);
-    box-shadow: 0px 0px 5px 0px rgb(0, 92, 224);
+    color: var(--white);
+    background-color: var(--blue3);
+    border: 2px solid var(--blue3);
 }
 
-#deleteGoal:hover {
+#delete-goal:hover {
     background: none;
-    color: var(--hoverColor);
-    background-color: red;
-    border: 2px solid red;
-    box-shadow: 0px 0px 5px 0px red;
+    color: var(--white);
+    background-color: var(--red);
+    border: 2px solid var(--red);
 }
 
-#editGoal:active {
-    background-color: rgb(0, 45, 112);
-    border: 2px solid rgb(0, 45, 112);
-    box-shadow: 0;
-    transform: scale(0.8);
+#edit-goal:active {
+    opacity: 0.8;
+    transform: scale(0.9);
 }
 
-#deleteGoal:active {
-    background-color: rgb(150, 0, 0);
-    border: 2px solid rgb(150, 0, 0);
-    box-shadow: 0;
-    transform: scale(0.8);
+#delete-goal:active {
+    opacity: 0.8;
+    transform: scale(0.9);
 }
 
 
 
-/* #todolist {
-    display: none;
-    list-style: none;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    font-weight: bold;
-    margin: 0px;
-    background-color: var(--backgroundColorWhite);
-    padding: 0;
-}
-
-#goalItem {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 40px;
-    font-size: 20px;
-    font-family: Raleway, 'Roboto Condensed', sans-serif;
-    border-top: 1px solid rgba(160, 160, 160, 0.2);
-    color: var(--fontColor);
-}
-
-.buttonsGoal {
-    background-color: var(--backgroundColorWhite);
-    flex: 1 1 0;
-    cursor: pointer;
-    transition: all 0.4s ease;
-    height: 100%;
-    color: var(--fontColor);
-}
-
-.buttonsGoal:hover {
-    background: linear-gradient(to right, var(--backgroundColorWhite) -20%, rgba(160, 160, 160, 0.4) 48% 52%, var(--backgroundColorWhite) 120%);
-}
-
-#completeGoal:active {
-    background: none;
-    background-color: rgb(0, 189, 60);
-    box-shadow: inset 1px 1px 10px 0px rgba(32, 32, 32, 0.6);
-}
-
-#todolist li {
-    flex: 9 1 0;
-    background-color: var(--backgroundColorWhite);
-    font-family: Raleway,'Roboto Condensed', sans-serif;
-    font-size: 16px;
-    flex: wrap;
-}
-
-#deleteGoal:active {
-    background: none;
-    background-color: red;
-    box-shadow: inset 1px 1px 10px 0px rgba(32, 32, 32, 0.6);
-}
-
-#editGoal:active {
-    background: none;
-    background-color: rgb(0, 92, 224);
-    box-shadow: inset 1px 1px 10px 0px rgba(32, 32, 32, 0.6);
-} */
-
-#counterGoals {
+#counter-goals {
     font-family: Raleway, 'Roboto Condensed', sans-serif;
     font-weight: 400;
     font-size: 24px;
     margin-bottom: 50px;
-    color: var(--fontColor);
+    color: var(--black);
 }
 
-#counterGoals span {
+#counter-goals span {
     font-weight: bolder;
     font-family: 'Roboto Condensed', sans-serif;
-    color: rgb(0, 189, 60);
+    color: var(--green);
 }
 
 

@@ -1,17 +1,17 @@
-const themeButton = document.querySelector("#themeButton");
+const themeButton = document.querySelector("#theme-button");
 const timer = document.querySelector("#timer");
-const nextTimer = document.querySelector("#nextTimer");
+const nextTimer = document.querySelector("#next-timer");
 const startPauseButton = document.querySelector("#pausa-start");
 const resetButton = document.querySelector("#reset");
 const skipButton = document.querySelector("#skip");
-const ringSound = document.querySelector("#ringSound");
-const counterContainer = document.querySelector("#counterContainer");
+const ringSound = document.querySelector("#ring-sound");
+const counterContainer = document.querySelector("#counter-container");
 
 const addGoal = document.querySelector("#add-goal");
 const inputGoal = document.querySelector("#input-goal");
 const todolist = document.querySelector("#todolist");
-const counterGoals = document.querySelector("#goalsCompleted");
-const listItem = document.querySelectorAll(".listItem");
+const counterGoals = document.querySelector("#goals-completed");
+const listItem = document.querySelectorAll(".list-item");
 const favicon = document.querySelector("#favicon");
 
 let seconds = 1500; 
@@ -24,27 +24,27 @@ let goalsCompleted = 0;
 let darkTheme = false;
 
 //change the theme of the page
-function changeTheme () {
-    if (!darkTheme) {        
-        document.documentElement.style.setProperty("--fontColor", "white");
-        document.documentElement.style.setProperty("--backgroundColorGray", "#000000");
-        document.documentElement.style.setProperty("--borderColor", "#4A4A4A");
-        document.documentElement.style.setProperty("--backgroundColorWhite", "#101010");
-        document.documentElement.style.setProperty("--counterBackground", "#000000");
-        document.documentElement.style.setProperty("--gradientList", "#1e1e1e")
-        darkTheme = true;
-    } else {
-        document.documentElement.style.setProperty("--fontColor", "rgb(34, 34, 34)");
-        document.documentElement.style.setProperty("--backgroundColorGray", "rgba(206, 206, 206, 0.452)");
-        document.documentElement.style.setProperty("--borderColor", "rgba(156, 156, 156, 1)");
-        document.documentElement.style.setProperty("--backgroundColorWhite", "#ececec");
-        document.documentElement.style.setProperty("--hoverBackground", "#080808");
-        document.documentElement.style.setProperty("--hoverColor", "white");
-        document.documentElement.style.setProperty("--counterBackground", "#DDDDDD"); 
-        document.documentElement.style.setProperty("--gradientList", "rgba(160, 160, 160, 0.4)")  
-        darkTheme = false;
-    }
-}
+// function changeTheme () {
+//     if (!darkTheme) {        
+//         document.documentElement.style.setProperty("--fontColor", "white");
+//         document.documentElement.style.setProperty("--backgroundColorGray", "#000000");
+//         document.documentElement.style.setProperty("--borderColor", "#4A4A4A");
+//         document.documentElement.style.setProperty("--backgroundColorWhite", "#101010");
+//         document.documentElement.style.setProperty("--counterBackground", "#000000");
+//         document.documentElement.style.setProperty("--gradientList", "#1e1e1e")
+//         darkTheme = true;
+//     } else {
+//         document.documentElement.style.setProperty("--fontColor", "rgb(34, 34, 34)");
+//         document.documentElement.style.setProperty("--backgroundColorGray", "rgba(206, 206, 206, 0.452)");
+//         document.documentElement.style.setProperty("--borderColor", "rgba(156, 156, 156, 1)");
+//         document.documentElement.style.setProperty("--backgroundColorWhite", "#ececec");
+//         document.documentElement.style.setProperty("--hoverBackground", "#080808");
+//         document.documentElement.style.setProperty("--hoverColor", "white");
+//         document.documentElement.style.setProperty("--counterBackground", "#DDDDDD"); 
+//         document.documentElement.style.setProperty("--gradientList", "rgba(160, 160, 160, 0.4)")  
+//         darkTheme = false;
+//     }
+// }
 
 function updateTimer () {
     if (seconds === 0) {
@@ -78,7 +78,6 @@ function changeTimer () {
             nextTimer.textContent = "15:00";
         } else {
             nextTimer.textContent = "5:00";
-
         }
     }
     running = false;        
@@ -131,8 +130,8 @@ function resetBigTimer () {
 //change the color of the count
 function changeColor(stageSeconds) {
     if (!running) {
-        counterContainer.style.borderColor = "rgba(156, 156, 156, 1)"; 
-        counterContainer.style.boxShadow = "inset 0px 0px 39px 32px rgba(255, 255, 255, 0.44)";
+        counterContainer.style.borderColor = "#75c4f8"; 
+        counterContainer.style.boxShadow = "inset 0px 0px 39px 32px #bde4fb";
         favicon.href = "/styles/favicon-neutral.svg";
     } else if (stageSeconds === 1500) {
         counterContainer.style.borderColor = "rgba(255, 0, 0, 0.8)";
@@ -140,12 +139,11 @@ function changeColor(stageSeconds) {
         favicon.href = "/styles/favicon-work.svg";
     } else if (stageSeconds === 300 || stageSeconds === 900) {
         favicon.href = "/styles/favicon-rest.svg";
-        counterContainer.style.borderColor = "rgba(0, 92, 224, 0.8)";
-        counterContainer.style.boxShadow = "inset 0px 0px 39px 32px rgba(0, 92, 224, 0.20)";
+        counterContainer.style.borderColor = "rgb(0, 189, 60)";
+        counterContainer.style.boxShadow = "inset 0px 0px 39px 32px rgba(0, 189, 60, 0.20)";
     }
 }
 
-themeButton.addEventListener('click', changeTheme);
 startPauseButton.addEventListener('click', startBigTimer);
 startPauseButton.addEventListener('click', function () {
     if (startPauseButton.textContent === "S t a r t") {
@@ -168,9 +166,6 @@ function createGoal() {
         const check = createCheck();
         const edit = createEdit();
         const deleter = createDelete();
-        check.textContent = 'C';
-        edit.textContent = 'E';
-        deleter.textContent = 'D';
         goalItem.appendChild(check);
         goalItem.appendChild(description);
         goalItem.appendChild(edit);
@@ -178,35 +173,47 @@ function createGoal() {
 
         goalItem.setAttribute("id", "goal-item");
         todolist.appendChild(goalItem);
+        counterGoals.textContent = checkPorcentaje(todolist.children.length, goalsCompleted);
         inputGoal.value = "";
     }        
 }
 
 function createCheck() {
-    const completeGoal = document.createElement("button");
-    completeGoal.setAttribute("id", "completeGoal");
-    completeGoal.setAttribute("class", "buttonsGoal");
+    const completeGoal = document.createElement("input");
+    completeGoal.setAttribute("id", "complete-goal");
+    completeGoal.setAttribute("type", "checkbox");
+    completeGoal.classList.add('buttons-goal');
     //class for the visual icon
     const iconCheck = document.createElement("i");
-    iconCheck.setAttribute("class", "fa-solid fa-check");
+    iconCheck.classList.add("fa-solid", "fa-check");
     completeGoal.appendChild(iconCheck);
-    completeGoal.addEventListener("click", () => {
+
+
+
+
+    //agregar eventlistener para revisar el check del checkbox
+    completeGoal.addEventListener("checked", (e) => {
+        console.log(e)
         goalsCompleted++;
-        counterGoals.textContent = goalsCompleted;
-        const item = completeGoal.parentNode;
-        item.remove();
-    })
+        counterGoals.textContent = checkPorcentaje(todolist.children.length, goalsCompleted);
+    });
+
+    completeGoal.addEventListener("select", () => {
+        goalsCompleted--;
+        counterGoals.textContent = checkPorcentaje(todolist.children.length, goalsCompleted);
+    });
     return completeGoal;
 }
 
 function createDelete() {
     const deleteGoal = document.createElement("button");
-    deleteGoal.setAttribute("id", "deleteGoal");
-    deleteGoal.setAttribute("class", "buttonsGoal");
+    deleteGoal.setAttribute("id", "delete-goal");
+    deleteGoal.classList.add("buttons-goal");
     //class for the visual icon
     const iconDelete = document.createElement("i");
-    iconDelete.setAttribute("class", "fa-solid fa-trash");
+    iconDelete.classList.add("fa-solid", "fa-trash");
     deleteGoal.appendChild(iconDelete);
+
     deleteGoal.addEventListener("click", () => {
         const item = deleteGoal.parentNode;
         item.remove();
@@ -216,11 +223,11 @@ function createDelete() {
 
 function createEdit() {
     const editGoal = document.createElement("button");
-    editGoal.setAttribute("id", "editGoal");
-    editGoal.setAttribute("class", "buttonsGoal");
+    editGoal.setAttribute("id", "edit-goal");
+    editGoal.classList.add("buttons-goal");
     //class for the visual icon
     const iconEdit = document.createElement("i");
-    iconEdit.setAttribute("class", "fa-solid fa-pen-to-square");
+    iconEdit.classList.add("fa-solid", "fa-pen-to-square");
     editGoal.appendChild(iconEdit);
     editGoal.addEventListener("click", () => {
         const content = editGoal.previousElementSibling;
@@ -229,6 +236,10 @@ function createEdit() {
         item.remove();
     })
     return editGoal;
+}
+
+function checkPorcentaje(total, completed) {
+    return (100 / total) * completed;
 }
 
 addGoal.addEventListener("click", createGoal);
