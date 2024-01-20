@@ -164,22 +164,6 @@ body {
     color: var(--white);    
 }
 
-@media (max-width: 600px) {
-    #container-btns {
-        border-radius: 34px;
-        height: 100px;
-        flex-direction: column;
-    }
-
-    #pausa-start {
-        border-radius: 50px 50px 0px 0px;
-    }
-    
-    #skip {
-        border-radius: 0px 0px 50px 50px;
-    }
-}
-
 /*Here begins the todolist style*/
 
 #todolist-container {
@@ -271,7 +255,7 @@ body {
     gap: 10px;
 }
 
-#goal-item {
+.goal-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -280,8 +264,16 @@ body {
     background-color: white;
 }
 
+.goal-item p {
+    margin: 0px 10px;
+    flex: 10;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
 .buttons-goal {
-    border: 2px solid var(--gray1);
+    border: 1px solid var(--gray1);
     border-radius: 50%;
     padding: 8px;
     font-size: 0.8rem;
@@ -292,34 +284,73 @@ body {
 }
 
 /* arreglar selector para que cambie el span cuando hace check */
-#complete-goal:checked ~ #goal-item span {
-    opacity: 0.5;
+input[type='checkbox'] {
+    display: none;
 }
 
-#complete-goal {
-    accent-color: var(--green);
+.complete-goal span {
+    display: inline-block;
+    position: relative;
+    height: 2em;
+    width: 2em;
+    background-color: var(--background-white);
+    border-radius: 100%;
+    transition: all 0.4s;
+    border: 1px solid var(--gray1);
 }
 
-#edit-goal:hover {
+.complete-goal {
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.complete-goal input:checked ~ span {
+    border: 1px solid var(--green);
+    background: var(--green);
+}
+
+.complete-goal input:checked ~ span:after {
+    opacity: 1;
+}
+
+.complete-goal span:after {
+    content: "";
+    position: absolute;
+    border: solid var(--background-white);
+    border-width: 0 0.3em 0.3em 0;
+    transform: rotate(45deg);
+    width: 0.5em;
+    height: 1em;
+    left: 0.6em;
+    top: 0.25em;
+    opacity: 0;
+    transition: 0.3s ease;
+}
+
+.goal-item div {
+    flex: 1;
+}
+
+.edit-goal:hover {
     background: none;
     color: var(--white);
     background-color: var(--blue3);
     border: 2px solid var(--blue3);
 }
 
-#delete-goal:hover {
+.delete-goal:hover {
     background: none;
     color: var(--white);
     background-color: var(--red);
     border: 2px solid var(--red);
 }
 
-#edit-goal:active {
+.edit-goal:active {
     opacity: 0.8;
     transform: scale(0.9);
 }
 
-#delete-goal:active {
+.delete-goal:active {
     opacity: 0.8;
     transform: scale(0.9);
 }
@@ -353,4 +384,35 @@ body {
     position: absolute;
     bottom: 0;
     pointer-events: none;
+}
+
+
+@media (max-width: 600px) {
+    #container-btns {
+        border-radius: 34px;
+        height: 100px;
+        flex-direction: column;
+    }
+
+    #pausa-start {
+        border-radius: 50px 50px 0px 0px;
+    }
+    
+    #skip {
+        border-radius: 0px 0px 50px 50px;
+    }
+
+    .goal-item div {
+        flex-direction: column;
+    }
+
+    .buttons-goal {
+        font-size: 0.7rem;
+    }
+
+    #todolist-container {
+        margin: 40px auto;
+        padding: 20px;
+        width: 80vw;
+    }
 }

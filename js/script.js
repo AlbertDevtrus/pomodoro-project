@@ -161,17 +161,19 @@ function createGoal() {
     const descriptionGoal = inputGoal.value;
     if (descriptionGoal.trim() !== "") {
         const goalItem = document.createElement("li");
-        const description = document.createElement('span');
+        const description = document.createElement('p');
         description.textContent = descriptionGoal;
         const check = createCheck();
         const edit = createEdit();
         const deleter = createDelete();
+        const div = document.createElement('div');
+        div.appendChild(edit);
+        div.appendChild(deleter);
         goalItem.appendChild(check);
         goalItem.appendChild(description);
-        goalItem.appendChild(edit);
-        goalItem.appendChild(deleter);
+        goalItem.appendChild(div);
 
-        goalItem.setAttribute("id", "goal-item");
+        goalItem.setAttribute("class", "goal-item");
         todolist.appendChild(goalItem);
         counterGoals.textContent = checkPorcentaje(todolist.children.length, goalsCompleted);
         inputGoal.value = "";
@@ -180,16 +182,13 @@ function createGoal() {
 
 function createCheck() {
     const completeGoal = document.createElement("input");
-    completeGoal.setAttribute("id", "complete-goal");
+    const label = document.createElement('label');
+    const span = document.createElement('span');
+    label.appendChild(completeGoal);
+    label.appendChild(span);
+    label.setAttribute("class", "complete-goal");
     completeGoal.setAttribute("type", "checkbox");
-    completeGoal.classList.add('buttons-goal');
     //class for the visual icon
-    const iconCheck = document.createElement("i");
-    iconCheck.classList.add("fa-solid", "fa-check");
-    completeGoal.appendChild(iconCheck);
-
-
-
 
     //agregar eventlistener para revisar el check del checkbox
     completeGoal.addEventListener("checked", (e) => {
@@ -202,12 +201,12 @@ function createCheck() {
         goalsCompleted--;
         counterGoals.textContent = checkPorcentaje(todolist.children.length, goalsCompleted);
     });
-    return completeGoal;
+    return label;
 }
 
 function createDelete() {
     const deleteGoal = document.createElement("button");
-    deleteGoal.setAttribute("id", "delete-goal");
+    deleteGoal.setAttribute("class", "delete-goal");
     deleteGoal.classList.add("buttons-goal");
     //class for the visual icon
     const iconDelete = document.createElement("i");
@@ -223,7 +222,7 @@ function createDelete() {
 
 function createEdit() {
     const editGoal = document.createElement("button");
-    editGoal.setAttribute("id", "edit-goal");
+    editGoal.setAttribute("class", "edit-goal");
     editGoal.classList.add("buttons-goal");
     //class for the visual icon
     const iconEdit = document.createElement("i");

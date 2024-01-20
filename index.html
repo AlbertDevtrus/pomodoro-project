@@ -35,16 +35,21 @@
         <h2 id="header-todolist">Goals</h2>
         <div id="container-goal">             
             <div>
-                <input type="text" id="input-goal" placeholder="Finish my homework!" maxlength="65">            
+                <input type="text" id="input-goal" placeholder="Finish my homework!" maxlength="100">            
                 <button id="add-goal"><i class="fa-solid fa-plus"></i></button>
             </div>
             <ul id="todolist">
 
-                <li id="goal-item">
-                    <input id="complete-goal" class="buttons-goal" type="checkbox">
-                    <span>Una meta a alcanzar</span>
-                    <button id="edit-goal" class="buttons-goal"></button>
-                    <button class="buttons-goal" id="delete-goal"></button>
+                <li class="goal-item">
+                    <label class="complete-goal">
+                        <input type="checkbox">
+                        <span></span>
+                    </label>
+                    <p>Meta a alcanzar</p>
+                    <div>
+                        <button class="buttons-goal edit-goal"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i></button>
+                        <button class="buttons-goal delete-goal"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
+                    </div>
                 </li>
                 
             </ul>
