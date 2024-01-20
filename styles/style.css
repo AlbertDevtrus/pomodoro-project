@@ -8,6 +8,7 @@
     --blue2: #75c4f8;
     --blue3: rgb(0, 92, 224);
     --blue4: #1875b3;
+    --blue5: #3F9BED;
     --background-white: #f7fafc;
 
     --green: rgb(0, 189, 60);
@@ -327,6 +328,10 @@ input[type='checkbox'] {
     transition: 0.3s ease;
 }
 
+.complete-goal input:hover ~ span {
+    box-shadow: inset 0px 0px 5px 1px var(--green);
+}
+
 .goal-item div {
     flex: 1;
 }
@@ -386,6 +391,14 @@ input[type='checkbox'] {
     pointer-events: none;
 }
 
+#ia-section {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--blue5);
+}
+
+
+/* media querys */
 
 @media (max-width: 600px) {
     #container-btns {

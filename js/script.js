@@ -106,7 +106,7 @@ function leftZero (number) {
 
 //start and stop the timer 
 function startBigTimer () {
-    if (!running) {        
+    if (!running) {
         intervalBigTimer = setInterval(updateTimer, 1000);
         running = true;        
         changeColor(secondsTimer);
