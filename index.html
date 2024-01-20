@@ -42,13 +42,13 @@
 
                 <li class="goal-item">
                     <label class="complete-goal">
-                        <input type="checkbox">
+                        <input type="checkbox" onclick="checkSelection()" id="checkbox1">
                         <span></span>
                     </label>
-                    <p>Meta a alcanzar</p>
+                    <p>Hola soy una meta</p>
                     <div>
-                        <button class="buttons-goal edit-goal"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i></button>
-                        <button class="buttons-goal delete-goal"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
+                        <button class="edit-goal buttons-goal"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i></button>
+                        <button class="delete-goal buttons-goal"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
                     </div>
                 </li>
                 
@@ -56,7 +56,7 @@
         </div>
     </section>
     <div id="counter-goals">
-        You have completed <span id="goals-completed">0</span> goals.
+        You have completed the <span id="goals-completed">0%</span> of your goals!
     </div>
     <section id="info">
         

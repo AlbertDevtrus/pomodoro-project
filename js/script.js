@@ -13,6 +13,7 @@ const todolist = document.querySelector("#todolist");
 const counterGoals = document.querySelector("#goals-completed");
 const listItem = document.querySelectorAll(".list-item");
 const favicon = document.querySelector("#favicon");
+const checkbox = document.querySelectorAll('input[type="checkbox"]');
 
 let seconds = 1500; 
 let intervalBigTimer;
@@ -20,8 +21,8 @@ let running = false;
 let intervalNextTimer;
 let secondsTimer = 1500;
 let breakTimer = 1;
-let goalsCompleted = 0;
 let darkTheme = false;
+let numCheckbox = 1;
 
 //change the theme of the page
 // function changeTheme () {
@@ -175,12 +176,13 @@ function createGoal() {
 
         goalItem.setAttribute("class", "goal-item");
         todolist.appendChild(goalItem);
-        counterGoals.textContent = checkPorcentaje(todolist.children.length, goalsCompleted);
         inputGoal.value = "";
+        checkSelection();
     }        
 }
 
 function createCheck() {
+    numCheckbox++;
     const completeGoal = document.createElement("input");
     const label = document.createElement('label');
     const span = document.createElement('span');
@@ -188,19 +190,8 @@ function createCheck() {
     label.appendChild(span);
     label.setAttribute("class", "complete-goal");
     completeGoal.setAttribute("type", "checkbox");
-    //class for the visual icon
-
-    //agregar eventlistener para revisar el check del checkbox
-    completeGoal.addEventListener("checked", (e) => {
-        console.log(e)
-        goalsCompleted++;
-        counterGoals.textContent = checkPorcentaje(todolist.children.length, goalsCompleted);
-    });
-
-    completeGoal.addEventListener("select", () => {
-        goalsCompleted--;
-        counterGoals.textContent = checkPorcentaje(todolist.children.length, goalsCompleted);
-    });
+    completeGoal.setAttribute("onclick", "checkSelection()");
+    completeGoal.setAttribute("id", `checkbox${numCheckbox}`);  
     return label;
 }
 
@@ -239,6 +230,28 @@ function createEdit() {
 
 function checkPorcentaje(total, completed) {
     return (100 / total) * completed;
+}
+
+const stateCheckbox = {};
+
+function checkSelection() {
+    let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    for (let i = 0; i < checkboxes.length; i++) {
+        let checkboxId = checkboxes[i].id;
+    
+        stateCheckbox[checkboxId] = checkboxes[i].checked;
+    }
+    
+    let goalsCompleted = 0;
+
+    for(let check in stateCheckbox) {
+        if (stateCheckbox[check]) {
+            goalsCompleted++;
+        }
+    }
+
+    counterGoals.textContent = `${checkPorcentaje(checkboxes.length, goalsCompleted).toFixed(2)}%`;
 }
 
 addGoal.addEventListener("click", createGoal);
