@@ -249,6 +249,7 @@ body {
     border-radius: 25px;
     background-color: var(--red);
     color: var(--background-white);
+    transition: all 0.3s ease;
 }
 
 /* start the list of the goals*/
@@ -335,7 +336,7 @@ input[type='checkbox'] {
     left: 0.6em;
     top: 0.25em;
     opacity: 0;
-    transition: 0.3s ease;
+    transition: 0.2s ease;
 }
 
 .complete-goal input:hover ~ span {

@@ -15,6 +15,8 @@ const listItem = document.querySelectorAll(".list-item");
 const favicon = document.querySelector("#favicon");
 const checkbox = document.querySelectorAll('input[type="checkbox"]');
 
+const errorMessage = document.querySelector('.error');
+
 let seconds = 1500; 
 let intervalBigTimer;
 let running = false;
@@ -160,7 +162,8 @@ skipButton.addEventListener('click', changeTimer);
 
 function createGoal() {
     const descriptionGoal = inputGoal.value;
-    if (descriptionGoal.trim() !== "") {
+    if (descriptionGoal.trim() !== "" && todolist.children.length < 10) {
+        errorMessage.style.display = 'none';
         const goalItem = document.createElement("li");
         const description = document.createElement('p');
         description.textContent = descriptionGoal;
@@ -178,7 +181,10 @@ function createGoal() {
         todolist.appendChild(goalItem);
         inputGoal.value = "";
         checkSelection();
-    }        
+    } else if(todolist.children.length >= 10) {
+        console.log('10 o mas');
+        errorMessage.style.display = 'inline';
+    }
 }
 
 function createCheck() {
@@ -205,7 +211,7 @@ function createDelete() {
     deleteGoal.appendChild(iconDelete);
 
     deleteGoal.addEventListener("click", () => {
-        const item = deleteGoal.parentNode;
+        const item = deleteGoal.parentNode.parentNode;
         item.remove();
     })
     return deleteGoal;
