@@ -194,7 +194,6 @@ body {
 
 #container-goal div {
     display: flex;
-    flex-direction: center;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -240,6 +239,17 @@ body {
     transform: scale(0.9);
 }
 
+
+/* Error */
+
+.error {
+    display: none;
+    padding: 10px 40px;
+    margin: 30px 0px 0px 0px;
+    border-radius: 25px;
+    background-color: var(--red);
+    color: var(--background-white);
+}
 
 /* start the list of the goals*/
 
@@ -396,7 +406,6 @@ input[type='checkbox'] {
     height: 100vh;
     background-color: var(--blue5);
 }
-
 
 /* media querys */
 
