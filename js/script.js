@@ -228,9 +228,9 @@ function createEdit() {
     iconEdit.classList.add("fa-solid", "fa-pen-to-square");
     editGoal.appendChild(iconEdit);
     editGoal.addEventListener("click", () => {
-        const content = editGoal.previousElementSibling;
+        const content = editGoal.parentNode.previousElementSibling;
         inputGoal.value = content.textContent;
-        const item = editGoal.parentNode;
+        const item = editGoal.parentNode.parentNode;
         item.remove();
     })
     return editGoal;
