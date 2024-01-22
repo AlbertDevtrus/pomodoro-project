@@ -204,6 +204,7 @@ function createCheck() {
 function createDelete() {
     const deleteGoal = document.createElement("button");
     deleteGoal.setAttribute("class", "delete-goal");
+    deleteGoal.setAttribute('aria-label', 'delete');
     deleteGoal.classList.add("buttons-goal");
     //class for the visual icon
     const iconDelete = document.createElement("i");
@@ -220,6 +221,7 @@ function createDelete() {
 function createEdit() {
     const editGoal = document.createElement("button");
     editGoal.setAttribute("class", "edit-goal");
+    editGoal.setAttribute('aria-label', 'edit');
     editGoal.classList.add("buttons-goal");
     //class for the visual icon
     const iconEdit = document.createElement("i");
