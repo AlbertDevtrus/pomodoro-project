@@ -25,6 +25,7 @@ let secondsTimer = 1500;
 let breakTimer = 1;
 let darkTheme = false;
 let numCheckbox = 1;
+let goals = [];
 
 //change the theme of the page
 // function changeTheme () {
@@ -157,34 +158,65 @@ startPauseButton.addEventListener('click', function () {
 });
 resetButton.addEventListener('click', resetBigTimer);
 skipButton.addEventListener('click', changeTimer);
+document.addEventListener('DOMContentLoaded', () => {
+    goals = JSON.parse(localStorage.getItem('goals')) || [];
+
+    generateHTML();
+});
 
 //todo list functions
 
 function createGoal() {
     const descriptionGoal = inputGoal.value;
+
     if (descriptionGoal.trim() !== "" && todolist.children.length < 10) {
         errorMessage.style.display = 'none';
+
+        const goalObj = {
+            id: Date.now(),
+            text: descriptionGoal
+        }
+
+        goals = [...goals, goalObj];
+
+        generateHTML();
+
+        inputGoal.value = "";
+
+        syncStorage();
+
+        checkSelection();
+    } else if(todolist.children.length >= 10) {
+        errorMessage.style.display = 'inline';
+    }
+}
+
+function generateHTML() {
+    clearHTML()
+
+    goals.forEach(goal => {
         const goalItem = document.createElement("li");
         const description = document.createElement('p');
-        description.textContent = descriptionGoal;
+
+        description.textContent = goal.text;
+
         const check = createCheck();
         const edit = createEdit();
-        const deleter = createDelete();
+        const deleter = createDelete(goal.id);
+
         const div = document.createElement('div');
         div.appendChild(edit);
         div.appendChild(deleter);
+
         goalItem.appendChild(check);
         goalItem.appendChild(description);
         goalItem.appendChild(div);
 
         goalItem.setAttribute("class", "goal-item");
+        
         todolist.appendChild(goalItem);
-        inputGoal.value = "";
-        checkSelection();
-    } else if(todolist.children.length >= 10) {
-        console.log('10 o mas');
-        errorMessage.style.display = 'inline';
-    }
+    });
+    syncStorage();
 }
 
 function createCheck() {
@@ -201,7 +233,7 @@ function createCheck() {
     return label;
 }
 
-function createDelete() {
+function createDelete(id) {
     const deleteGoal = document.createElement("button");
     deleteGoal.setAttribute("class", "delete-goal");
     deleteGoal.setAttribute('aria-label', 'delete');
@@ -211,10 +243,9 @@ function createDelete() {
     iconDelete.classList.add("fa-solid", "fa-trash");
     deleteGoal.appendChild(iconDelete);
 
-    deleteGoal.addEventListener("click", () => {
-        const item = deleteGoal.parentNode.parentNode;
-        item.remove();
-    })
+    deleteGoal.onclick = () => {
+        deleteElement(id);
+    };
     return deleteGoal;
 }
 
@@ -227,18 +258,35 @@ function createEdit() {
     const iconEdit = document.createElement("i");
     iconEdit.classList.add("fa-solid", "fa-pen-to-square");
     editGoal.appendChild(iconEdit);
-    editGoal.addEventListener("click", () => {
+    editGoal.onclick = () => {
         const content = editGoal.parentNode.previousElementSibling;
         inputGoal.value = content.textContent;
         const item = editGoal.parentNode.parentNode;
         item.remove();
-    })
+    };
     return editGoal;
+}
+
+function deleteElement(id) {
+    goals = goals.filter(goal => goal.id !== id);
+
+    generateHTML();
+}
+
+function clearHTML() {
+    while(todolist.firstChild) {
+        todolist.removeChild(todolist.firstChild);
+    }
+}
+
+function syncStorage() {
+    localStorage.setItem('goals', JSON.stringify(goals));
 }
 
 function checkPorcentaje(total, completed) {
     return (100 / total) * completed;
 }
+
 
 const stateCheckbox = {};
 
