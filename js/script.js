@@ -24,7 +24,6 @@ let intervalNextTimer;
 let secondsTimer = 1500;
 let breakTimer = 1;
 let darkTheme = false;
-let numCheckbox = 1;
 let goals = [];
 
 //change the theme of the page
@@ -174,7 +173,8 @@ function createGoal() {
 
         const goalObj = {
             id: Date.now(),
-            text: descriptionGoal
+            text: descriptionGoal,
+            state: false
         }
 
         goals = [...goals, goalObj];
@@ -185,14 +185,13 @@ function createGoal() {
 
         syncStorage();
 
-        checkSelection();
     } else if(todolist.children.length >= 10) {
         errorMessage.style.display = 'inline';
     }
 }
 
 function generateHTML() {
-    clearHTML()
+    clearHTML();
 
     goals.forEach(goal => {
         const goalItem = document.createElement("li");
@@ -200,9 +199,10 @@ function generateHTML() {
 
         description.textContent = goal.text;
 
-        const check = createCheck();
-        const edit = createEdit();
+        const check = createCheck(goal.id, goal.state);
+        const edit = createEdit(goal.id);
         const deleter = createDelete(goal.id);
+        check.checked = goal.state;
 
         const div = document.createElement('div');
         div.appendChild(edit);
@@ -217,10 +217,10 @@ function generateHTML() {
         todolist.appendChild(goalItem);
     });
     syncStorage();
+    checkSelection();
 }
 
-function createCheck() {
-    numCheckbox++;
+function createCheck(id, state) {
     const completeGoal = document.createElement("input");
     const label = document.createElement('label');
     const span = document.createElement('span');
@@ -228,8 +228,17 @@ function createCheck() {
     label.appendChild(span);
     label.setAttribute("class", "complete-goal");
     completeGoal.setAttribute("type", "checkbox");
-    completeGoal.setAttribute("onclick", "checkSelection()");
-    completeGoal.setAttribute("id", `checkbox${numCheckbox}`);  
+    completeGoal.checked = state;  
+    completeGoal.onclick = () => {
+        goals.forEach(goal => {
+            if(id === goal.id) {
+                completeGoal.checked = !goal.state;
+                goal.state = completeGoal.checked;
+            }
+        });
+        syncStorage();
+        checkSelection();
+    };
     return label;
 }
 
@@ -249,7 +258,7 @@ function createDelete(id) {
     return deleteGoal;
 }
 
-function createEdit() {
+function createEdit(id) {
     const editGoal = document.createElement("button");
     editGoal.setAttribute("class", "edit-goal");
     editGoal.setAttribute('aria-label', 'edit');
@@ -258,12 +267,16 @@ function createEdit() {
     const iconEdit = document.createElement("i");
     iconEdit.classList.add("fa-solid", "fa-pen-to-square");
     editGoal.appendChild(iconEdit);
+
     editGoal.onclick = () => {
         const content = editGoal.parentNode.previousElementSibling;
         inputGoal.value = content.textContent;
         const item = editGoal.parentNode.parentNode;
         item.remove();
+        goals = goals.filter(goal => goal.id !== id);
+        syncStorage();
     };
+
     return editGoal;
 }
 
@@ -287,27 +300,18 @@ function checkPorcentaje(total, completed) {
     return (100 / total) * completed;
 }
 
-
-const stateCheckbox = {};
-
 function checkSelection() {
-    let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    if(goals.length > 0) {
+        let goalsCompleted = 0;
 
-    for (let i = 0; i < checkboxes.length; i++) {
-        let checkboxId = checkboxes[i].id;
-    
-        stateCheckbox[checkboxId] = checkboxes[i].checked;
+        goals.forEach(goal => {
+            if(goal.state) goalsCompleted++;
+        });
+
+        counterGoals.textContent = `${checkPorcentaje(goals.length, goalsCompleted).toFixed(2)}%`;
+    } else {
+        counterGoals.textContent = `0%`;
     }
-    
-    let goalsCompleted = 0;
-
-    for(let check in stateCheckbox) {
-        if (stateCheckbox[check]) {
-            goalsCompleted++;
-        }
-    }
-
-    counterGoals.textContent = `${checkPorcentaje(checkboxes.length, goalsCompleted).toFixed(2)}%`;
 }
 
 addGoal.addEventListener("click", createGoal);
