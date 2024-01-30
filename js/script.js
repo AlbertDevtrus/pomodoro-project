@@ -1,21 +1,19 @@
-const themeButton = document.querySelector("#theme-button");
-const timer = document.querySelector("#timer");
-const nextTimer = document.querySelector("#next-timer");
-const startPauseButton = document.querySelector("#pausa-start");
-const resetButton = document.querySelector("#reset");
-const skipButton = document.querySelector("#skip");
-const ringSound = document.querySelector("#ring-sound");
-const counterContainer = document.querySelector("#counter-container");
-
-const addGoal = document.querySelector("#add-goal");
-const inputGoal = document.querySelector("#input-goal");
-const todolist = document.querySelector("#todolist");
-const counterGoals = document.querySelector("#goals-completed");
-const listItem = document.querySelectorAll(".list-item");
-const favicon = document.querySelector("#favicon");
-const checkbox = document.querySelectorAll('input[type="checkbox"]');
-
-const errorMessage = document.querySelector('.error');
+import { 
+    themeButton,
+    timer,
+    nextTimer,
+    startPauseButton,
+    resetButton,
+    skipButton,
+    ringSound,
+    counterContainer,
+    addGoal,
+    inputGoal,
+    todolist,
+    counterGoals,
+    favicon,
+    errorMessage
+} from './selectors.js';
 
 let seconds = 1500; 
 let intervalBigTimer;
