@@ -24,28 +24,25 @@ let breakTimer = 1;
 let darkTheme = false;
 let goals = [];
 
-//change the theme of the page
-// function changeTheme () {
-//     if (!darkTheme) {        
-//         document.documentElement.style.setProperty("--fontColor", "white");
-//         document.documentElement.style.setProperty("--backgroundColorGray", "#000000");
-//         document.documentElement.style.setProperty("--borderColor", "#4A4A4A");
-//         document.documentElement.style.setProperty("--backgroundColorWhite", "#101010");
-//         document.documentElement.style.setProperty("--counterBackground", "#000000");
-//         document.documentElement.style.setProperty("--gradientList", "#1e1e1e")
-//         darkTheme = true;
-//     } else {
-//         document.documentElement.style.setProperty("--fontColor", "rgb(34, 34, 34)");
-//         document.documentElement.style.setProperty("--backgroundColorGray", "rgba(206, 206, 206, 0.452)");
-//         document.documentElement.style.setProperty("--borderColor", "rgba(156, 156, 156, 1)");
-//         document.documentElement.style.setProperty("--backgroundColorWhite", "#ececec");
-//         document.documentElement.style.setProperty("--hoverBackground", "#080808");
-//         document.documentElement.style.setProperty("--hoverColor", "white");
-//         document.documentElement.style.setProperty("--counterBackground", "#DDDDDD"); 
-//         document.documentElement.style.setProperty("--gradientList", "rgba(160, 160, 160, 0.4)")  
-//         darkTheme = false;
-//     }
-// }
+eventListeners();
+function eventListeners() {
+    startPauseButton.addEventListener('click', startBigTimer);
+    startPauseButton.addEventListener('click', function () {
+        if (startPauseButton.textContent === "S t a r t") {
+            startPauseButton.textContent = "P a u s e";
+        } else {
+            startPauseButton.textContent = "S t a r t";
+        }
+    });
+    resetButton.addEventListener('click', resetBigTimer);
+    skipButton.addEventListener('click', changeTimer);
+    document.addEventListener('DOMContentLoaded', () => {
+        goals = JSON.parse(localStorage.getItem('goals')) || [];
+
+        generateHTML();
+    });
+    addGoal.addEventListener("click", createGoal);
+}
 
 function updateTimer () {
     if (seconds === 0) {
@@ -145,21 +142,7 @@ function changeColor(stageSeconds) {
     }
 }
 
-startPauseButton.addEventListener('click', startBigTimer);
-startPauseButton.addEventListener('click', function () {
-    if (startPauseButton.textContent === "S t a r t") {
-        startPauseButton.textContent = "P a u s e";
-    } else {
-        startPauseButton.textContent = "S t a r t";
-    }
-});
-resetButton.addEventListener('click', resetBigTimer);
-skipButton.addEventListener('click', changeTimer);
-document.addEventListener('DOMContentLoaded', () => {
-    goals = JSON.parse(localStorage.getItem('goals')) || [];
 
-    generateHTML();
-});
 
 //todo list functions
 
@@ -312,4 +295,3 @@ function checkSelection() {
     }
 }
 
-addGoal.addEventListener("click", createGoal);
