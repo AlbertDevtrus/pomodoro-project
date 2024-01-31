@@ -271,8 +271,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    border-radius: 15px;
+    padding: 10px 15px;
+    border-radius: 20px;
     background-color: white;
 }
 
@@ -285,14 +285,12 @@ body {
 }
 
 .buttons-goal {
-    border: 1px solid var(--gray1);
-    border-radius: 50%;
     padding: 8px;
-    font-size: 0.8rem;
+    font-size: 1rem;
     cursor: pointer;
-    background-color: white;
     transition: all 0.3s ease;
     text-align: center;
+    background: transparent;
 }
 
 /* arreglar selector para que cambie el span cuando hace check */
@@ -314,6 +312,7 @@ input[type='checkbox'] {
 .complete-goal {
     font-size: 10px;
     cursor: pointer;
+    display: flex;
 }
 
 .complete-goal input:checked ~ span {
@@ -339,26 +338,16 @@ input[type='checkbox'] {
     transition: 0.2s ease;
 }
 
-.complete-goal input:hover ~ span {
-    box-shadow: inset 0px 0px 5px 1px var(--green);
-}
-
 .goal-item div {
     flex: 1;
 }
 
 .edit-goal:hover {
-    background: none;
-    color: var(--white);
-    background-color: var(--blue3);
-    border: 2px solid var(--blue3);
+    color: var(--blue3);
 }
 
 .delete-goal:hover {
-    background: none;
-    color: var(--white);
-    background-color: var(--red);
-    border: 2px solid var(--red);
+    color: var(--red);
 }
 
 .edit-goal:active {

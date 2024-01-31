@@ -18,10 +18,8 @@ import {
 let seconds = 1500; 
 let intervalBigTimer;
 let running = false;
-let intervalNextTimer;
 let secondsTimer = 1500;
 let breakTimer = 1;
-let darkTheme = false;
 let goals = [];
 
 eventListeners();
@@ -43,6 +41,7 @@ function eventListeners() {
     });
     addGoal.addEventListener("click", createGoal);
 }
+
 
 function updateTimer () {
     if (seconds === 0) {
@@ -141,10 +140,6 @@ function changeColor(stageSeconds) {
         counterContainer.style.boxShadow = "inset 0px 0px 39px 32px rgba(0, 189, 60, 0.20)";
     }
 }
-
-
-
-//todo list functions
 
 function createGoal() {
     const descriptionGoal = inputGoal.value;
