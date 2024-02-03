@@ -54,8 +54,11 @@ function changeTheme() {
 
     if(newTheme === 'light') {
         info.style.backgroundImage = 'url(/styles/img/wave.svg)';
+        themeButton.innerHTML = '<i class="fa-solid fa-moon" style="color: var(--black);"></i>';
+        
     } else {
         info.style.backgroundImage = 'url(/styles/img/wave-dark.svg)';
+        themeButton.innerHTML = '<i class="fa-solid fa-sun" style="color: var(--black);"></i>';
     }
 
 
