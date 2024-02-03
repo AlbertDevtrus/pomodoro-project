@@ -40,8 +40,18 @@ function eventListeners() {
         generateHTML();
     });
     addGoal.addEventListener("click", createGoal);
+    
+    themeButton.addEventListener('click', changeTheme);
 }
 
+function changeTheme() {
+    const root = document.documentElement;
+    const currentTheme = root.getAttribute('data-theme') || 'light';
+
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+    root.setAttribute("data-theme", newTheme);
+}
 
 function updateTimer () {
     if (seconds === 0) {
@@ -127,15 +137,15 @@ function resetBigTimer () {
 //change the color of the count
 function changeColor(stageSeconds) {
     if (!running) {
-        counterContainer.style.borderColor = "#75c4f8"; 
-        counterContainer.style.boxShadow = "inset 0px 0px 39px 32px #bde4fb";
-        favicon.href = "/styles/favicon-neutral.svg";
+        counterContainer.style.borderColor = "var(--blue2)"; 
+        counterContainer.style.boxShadow = "inset 0px 0px 39px 0px var(--blue1)";
+        favicon.href = "/styles/icons/favicon-neutral.svg";
     } else if (stageSeconds === 1500) {
         counterContainer.style.borderColor = "rgba(255, 0, 0, 0.8)";
         counterContainer.style.boxShadow = "inset 0px 0px 39px 32px rgba(255, 0, 0, 0.20)";
-        favicon.href = "/styles/favicon-work.svg";
+        favicon.href = "/styles/icons/favicon-work.svg";
     } else if (stageSeconds === 300 || stageSeconds === 900) {
-        favicon.href = "/styles/favicon-rest.svg";
+        favicon.href = "/styles/icons/favicon-rest.svg";
         counterContainer.style.borderColor = "rgb(0, 189, 60)";
         counterContainer.style.boxShadow = "inset 0px 0px 39px 32px rgba(0, 189, 60, 0.20)";
     }
