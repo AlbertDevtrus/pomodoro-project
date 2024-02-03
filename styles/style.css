@@ -12,7 +12,7 @@
     --background-white: #f7fafc;
 
     --green: rgb(0, 189, 60);
-    --red: rgb(255, 0, 0);
+    --red: rgb(255, 0, 0);  
 }
 
 :root[data-theme="dark"] {
@@ -24,8 +24,8 @@
     --blue2: #234c85;
     --blue3: rgb(0, 92, 224);
     --blue4: #68bbf2;
-    --blue5: #266ccf;
-    
+    --blue5: #1E62C0;
+
     --background-white: #111f35;
     
     --green: rgb(0, 189, 60);
@@ -194,7 +194,7 @@ body {
     background-color: var(--blue2);
     width: 50vw;
     padding: 40px;
-    border-radius: 20px;
+    border-radius: 15px;
     transition: all 0.3s ease;
     font-weight: 700;
 }
@@ -293,7 +293,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
-    border-radius: 20px;
+    border-radius: 15px;
     background-color: var(--white);
 }
 
@@ -409,10 +409,11 @@ input[type='checkbox'] {
     height: auto;
     min-height: 100vh;
     overflow: hidden;
-    background-image: url(/styles/wave.svg);
+    background-image: url(/styles/img/wave.svg);
     background-size: auto;
     background-repeat: no-repeat;
     background-position: center bottom;
+    color: var(--black);
 }
 
 .container-cards {
@@ -430,7 +431,6 @@ input[type='checkbox'] {
     -webkit-backdrop-filter: blur(6px) saturate(200%);
     background-color: rgba(117, 196, 248, 0.6);
     border-radius: 20px;
-    border: 1px solid rgba(209, 213, 219, 0.3);
     padding: 20px;
     text-wrap: balance;
 }

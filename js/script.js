@@ -49,6 +49,15 @@ function changeTheme() {
     const currentTheme = root.getAttribute('data-theme') || 'light';
 
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    const info = document.querySelector('#info');
+
+    if(newTheme === 'light') {
+        info.style.backgroundImage = 'url(/styles/img/wave.svg)';
+    } else {
+        info.style.backgroundImage = 'url(/styles/img/wave-dark.svg)';
+    }
+
 
     root.setAttribute("data-theme", newTheme);
 }
