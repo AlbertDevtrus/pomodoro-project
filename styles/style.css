@@ -576,6 +576,37 @@ details {
     text-wrap: pretty;
 }
 
+details[open] p {
+    margin: 20px 0px 0px 0px;
+    font-weight: 400;
+}
+
+/* arrow styles */
+
+details summary {
+    list-style: none;
+    position: relative;
+    right: -10px;
+}
+
+details summary::-webkit-details-marker {
+    display: none; 
+}
+
+details summary::before {
+    content: '\276F'; 
+    font-size: 1em; 
+    margin-right: 0.5em; 
+    transition: all 0.3s ease; 
+    position: absolute;
+    top: -2px;
+    left: -15px;
+}
+
+details[open] summary::before {
+    transform: rotate(90deg);
+}
+
 /* media querys */
 
 @media (max-width: 800px) {
