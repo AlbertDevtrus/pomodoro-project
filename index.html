@@ -18,12 +18,18 @@
     <body>
         <header>
             <nav id="nav-bar">
-                <a href="#nav-bar">POMODORO</a>
-                <div id="div-nav"></div>
-                <a href="#todolist-container">GOALS</a>
-                <a href="#info">INFORMATION</a>
-                <a href="#ia-section">AI</a>
-                <button id="theme-button"><i class="fa-solid fa-moon" style="color: var(--black);"></i></button>
+                <a href="#timer" id="home">POMODORO</a>
+                <div class="responsive-button">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+                <div class="nav-links">
+                    <a href="#todolist-container">GOALS</a>
+                    <a href="#info">INFORMATION</a>
+                    <a href="#ia-section">AI</a>
+                    <button id="theme-button" aria-label="theme-button"><i class="fa-solid fa-moon"></i></button>
+                </div>
             </nav>
         </header>
         <div id="counter-container">
@@ -99,5 +105,18 @@
         </footer>
         <audio id="ring-sound" src="sounds/ringtone-1-46486.mp3" ></audio>
         <script src="/js/script.js" type="module"></script>
+        <script type="text/javascript">
+            window.addEventListener('scroll', function() {
+                const navBar = document.querySelector('#nav-bar');
+                navBar.classList.toggle('sticky', window.scrollY > 0);
+            });
+
+            const responsiveBtn = document.querySelector('.responsive-button');
+
+            responsiveBtn.onclick = function() {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.classList.toggle('active');
+            }
+        </script>
     </body>
 </html>

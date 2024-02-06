@@ -1,6 +1,8 @@
 :root[data-theme="light"] {
     --black: black;
     --gray1: rgba(156, 156, 156, 1);
+    --backdrop: rgba(0, 92, 224, 0.3);
+    --backdrop-color: white;
     --white: white;
 
     --blue1: #bde4fb;
@@ -19,6 +21,8 @@
 :root[data-theme="dark"] {
     --black: #f0f8fe;
     --gray1: rgba(156, 156, 156, 1);
+    --backdrop: rgba(0, 92, 224, 0.3);
+    --backdrop-color: white;
     --white: #204578;
 
     --blue1: #234c85;
@@ -62,14 +66,35 @@ header {
 }
 
 #nav-bar {
+    position: fixed;
     display: flex;
     width: 70%;
     justify-content: space-around;
     align-items: center;
-    padding: 10px;
+    padding: 20px;
+    gap: 100px;
+    transition: all 0.2s ease;
+    z-index: 1000;
 }
 
+.responsive-button {
+    display: none;
+}
+
+#nav-bar.sticky {
+    background-color: var(--backdrop);
+    backdrop-filter: blur(10px) saturate(50%);
+    padding: 10px 20px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+#nav-bar.sticky a {
+    color: var(--backdrop-color);
+}
+
+
 #nav-bar a {
+    position: relative;
     text-decoration: none;
     color: var(--black);
     letter-spacing: 3px;
@@ -78,22 +103,21 @@ header {
 }
 
 #nav-bar a:hover {
-    text-shadow: 0px 0px 10px var(--black);
+    text-shadow: 0px 0px 10px var(--blue4);
 }
 
-#nav-bar a:first-child {
-    color: var(--blue4);
-    font-size: 20px;
+#home {
+    color: var(--blue4)!important;
+    font-size: 20px!important;
 }
 
-#div-nav {
-    height: 70%;
-    width: 1px;
-    background-color: var(--blue4);
-    margin-right: 50px;
+#nav-bar.sticky #home:first-child {
+    font-weight: 700;
+    color: #68bbf2;
 }
 
-#theme-button {
+#nav-bar #theme-button {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,14 +132,22 @@ header {
     cursor: pointer;
     user-select: none;
     transition: all 0.4s ease;
-    padding: 20px;
+    padding: 10px;
     background: transparent;
     color: var(--black);
 }
 
-#theme-button:hover {
-    color: var(--white);
-} 
+#nav-bar.sticky #theme-button i {
+    color: var(--backdrop-color);
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 100px;
+}
 
 #counter-container {
     margin: 120px 0;
@@ -139,6 +171,7 @@ header {
 }
 
 #timer {
+    scroll-margin-top: 400px;
     font-size: 80px;
     margin-top: 30px;
     user-select: none;
@@ -234,7 +267,7 @@ header {
     margin: 40px auto;
     background-color: var(--blue2);
     width: 50vw;
-    padding: 40px;
+    padding: 20px 30px;
     border-radius: 15px;
     transition: all 0.3s ease;
     font-weight: 700;
@@ -243,8 +276,8 @@ header {
 
 #header-todolist {
     font-family: Raleway, 'sans-serif';
-    font-size: 2rem;
-    margin-bottom: 10px;
+    font-size: 1.5rem;
+    margin: 0px 0px 10px 0px;
     color: var(--black);
 }
 
@@ -339,7 +372,7 @@ header {
     list-style: none;
     width: 100%;
     height: 100%;
-    margin: 20px 0px 0px 0px;
+    margin: 0;
     padding: 10px;
     font-size: 1rem;
     gap: 10px;
@@ -349,7 +382,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
+    padding: 5px 10px;
     border-radius: 15px;
     background-color: var(--white);
 }
@@ -690,7 +723,7 @@ details[open] summary::before {
 
 /* media querys */
 
-@media (max-width: 800px) {
+@media only screen and (max-width: 800px) {
     #container-btns {
         border-radius: 34px;
         height: 100px;
@@ -736,5 +769,78 @@ details[open] summary::before {
 
     #container-details {
         padding: 15px 10px;
+    }
+
+    #nav-bar {
+        width: 100%;
+    }
+
+    .responsive-button {
+        display: block;
+        cursor: pointer;
+    }
+
+    .responsive-button .line {
+        width: 30px;
+        height: 3px;
+        background-color: var(--blue4);
+        margin: 6px 0;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 10px;
+        height: 0;
+        position: absolute;
+        top: 70px;
+        width: 100vw;
+        background-color: var(--background-white);
+        transition: 0.2s;
+        overflow: hidden;
+    }
+
+    .nav-links a {
+        background-color: var(--blue2);
+        padding: 10px 20px;
+        border-radius: 20px;
+    }
+
+    .nav-links a:hover {
+        background-color: var(--blue4);
+    }
+
+    #nav-bar.sticky {
+        width: 100vw;
+    }
+
+    #nav-bar.sticky .nav-links {
+        top: 53px;
+    }
+    
+    #nav-bar.sticky .nav-links {
+        background-color: var(--backdrop);
+    }
+    
+    .nav-links.active {
+        height: 300px;
+    }
+
+    .nav-links.active #theme-button {
+        opacity: 1;
+    }   
+}
+
+@media only screen and (max-width: 1100px) {
+    #nav-bar {
+        width: 90%;
+    }
+}
+
+
+@media only screen and (max-width: 900px) {
+    #nav-bar {
+        width: 90%;
     }
 }

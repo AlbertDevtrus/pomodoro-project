@@ -57,11 +57,11 @@ function changeTheme() {
 
     if(newTheme === 'light') {
         info.style.backgroundImage = 'url(/styles/img/wave.svg)';
-        themeButton.innerHTML = '<i class="fa-solid fa-moon" style="color: var(--black);"></i>';
+        themeButton.innerHTML = '<i class="fa-solid fa-moon"></i>';
         
     } else {
         info.style.backgroundImage = 'url(/styles/img/wave-dark.svg)';
-        themeButton.innerHTML = '<i class="fa-solid fa-sun" style="color: var(--black);"></i>';
+        themeButton.innerHTML = '<i class="fa-solid fa-sun"></i>';
     }
 
 
@@ -363,7 +363,11 @@ function generateHTMLIa(id, goal, ai) {
 }
 
 function callAPI(e) {
+
     const iaElement = e.target.parentNode.children[1];
+
+    if(iaElement.parentNode.open) return;
+
     const id = parseInt(e.target.parentNode.dataset.id);
 
     const goal = goals.find(goal => goal.id === id);
