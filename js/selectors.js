@@ -16,3 +16,7 @@ export const favicon = document.querySelector("#favicon");
 export const checkbox = document.querySelectorAll('input[type="checkbox"]');
 
 export const errorMessage = document.querySelector('.error');
+
+export const iaContainer = document.querySelector('#container-details');
+
+export const goalDetails = document.querySelector('.goal-details');
