@@ -322,13 +322,9 @@ header {
 
 .error-2 {
     display: block;
-    padding: 10px 20px;
     width: auto;
-    border-radius: 15px;
     font-weight: 400;
     font-size: 14px;
-    border: 2px solid var(--red);
-    background-color: rgba(250, 0, 0, 0.4);
     text-align: center;
     color: var(--alert-red);
     transition: all 0.3s ease;
@@ -518,6 +514,8 @@ input[type='checkbox'] {
     grid-row: 3/5;
 }
 
+/* AI section  */
+
 #ia-section {
     display: flex;
     align-items: center;
@@ -611,7 +609,13 @@ details[open] p {
     flex-direction: column;
     justify-content: center;
     margin: 20px 0px 0px 0px;
+    padding: 10px;
+    border-radius: 10px;
     font-weight: 400;
+    text-wrap: pretty;
+    border: 1px solid var(--blue1);
+    box-shadow: 0px 0px 15px 0px var(--blue1);
+    background-color: var(--background-white);
 }
 
 /* arrow styles */
@@ -724,5 +728,13 @@ details[open] summary::before {
 
     .card {
         width: 80%;
+    }
+
+    .container-ia {
+        width: 90%;
+    }
+
+    #container-details {
+        padding: 15px 10px;
     }
 }

@@ -426,6 +426,7 @@ function alertIa(element) {
     setTimeout(() => {
         element.classList.remove('error-2');
         element.textContent = '';
+        element.parentNode.open = false;
     }, 3000);
 }
 
