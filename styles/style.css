@@ -271,7 +271,7 @@ header {
     border-radius: 15px;
     transition: all 0.3s ease;
     font-weight: 700;
-    scroll-margin-top: 100px;
+    scroll-margin-top: 300px;
 }
 
 #header-todolist {
@@ -664,18 +664,78 @@ details summary::-webkit-details-marker {
 }
 
 details summary::before {
-    content: '\276F'; 
-    font-size: 1em; 
-    margin-right: 0.5em; 
-    transition: all 0.3s ease; 
-    position: absolute;
-    top: -2px;
-    left: -15px;
+    content:"";
+    position:absolute;
+    top:50%;
+    left:90%;
+    transform:translate(-50%, -50%);
+    width:20px;
+    height:0;
+    border-top:3px solid var(--blue4);
 }
 
-details[open] summary::before {
-    transform: rotate(90deg);
+
+details summary::after {
+    content:"";
+    position:absolute;
+    top:50%;
+    left:90%;
+    transform:translate(-50%, -50%);
+    width:0;
+    height:20px;
+    border-left:3px solid var(--blue4);
+    transition: all 0.3s ease;
 }
+
+details[open] summary::after {
+    height: 0%;
+}
+
+
+/* footer */
+
+footer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 30vh;
+    width: 100%;
+    background-color: var(--background-white);
+}
+
+footer h2 {
+    letter-spacing: 5px;
+    cursor: default;
+    user-select: none;
+    color: var(--blue4);
+    font-size: 20px;
+}
+
+footer div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+footer h3 {
+    color: var(--black);
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--black);
+    opacity: 0.6;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--blue4);
+}
+
 
 /*       SPINNER       */
 
@@ -723,10 +783,26 @@ details[open] summary::before {
 
 /* media querys */
 
+
+@media only screen and (max-width: 1100px) {
+    #nav-bar {
+        width: 90%;
+    }
+}
+
+
+@media only screen and (max-width: 900px) {
+    #nav-bar {
+        width: 90%;
+    }
+    
+}
+
 @media only screen and (max-width: 800px) {
     #container-btns {
         border-radius: 34px;
-        height: 100px;
+        height: 150px;
+        width: 40vw;
         flex-direction: column;
     }
 
@@ -811,10 +887,6 @@ details[open] summary::before {
         background-color: var(--blue4);
     }
 
-    #nav-bar.sticky {
-        width: 100vw;
-    }
-
     #nav-bar.sticky .nav-links {
         top: 53px;
     }
@@ -830,17 +902,8 @@ details[open] summary::before {
     .nav-links.active #theme-button {
         opacity: 1;
     }   
-}
 
-@media only screen and (max-width: 1100px) {
-    #nav-bar {
-        width: 90%;
-    }
-}
-
-
-@media only screen and (max-width: 900px) {
-    #nav-bar {
-        width: 90%;
+    footer h2 {
+        display: none;
     }
 }

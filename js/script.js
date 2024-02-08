@@ -64,7 +64,6 @@ function changeTheme() {
         themeButton.innerHTML = '<i class="fa-solid fa-sun"></i>';
     }
 
-
     root.setAttribute("data-theme", newTheme);
 }
 
@@ -346,10 +345,11 @@ function generateHTMLIa(id, goal, ai) {
 
     const summary = document.createElement('summary');
     summary.classList.add('goal-details');
+    
 
     summary.addEventListener('click', callAPI);
     
-    summary.textContent = goal;
+    summary.innerHTML = `${goal} <span ></span>`;
 
     const adviceIa = document.createElement('p');
     adviceIa.classList.add('ia-details');
