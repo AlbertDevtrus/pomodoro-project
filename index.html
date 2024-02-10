@@ -119,6 +119,10 @@
         <audio id="ring-sound" src="sounds/ringtone-1-46486.mp3" ></audio>
         <script src="/js/script.js" type="module"></script>
         <script type="text/javascript">
+            //WEB WORKER
+            // Crear un Web Worker
+            const worker = new Worker('./js/workers.js');
+
             window.addEventListener('scroll', function() {
                 const navBar = document.querySelector('#nav-bar');
                 navBar.classList.toggle('sticky', window.scrollY > 0);

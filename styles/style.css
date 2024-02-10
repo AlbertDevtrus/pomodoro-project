@@ -486,7 +486,7 @@ input[type='checkbox'] {
 #counter-goals span {
     font-weight: bolder;
     font-family: 'Roboto Condensed', sans-serif;
-    color: var(--green);
+    color: var(--blue4);
 }
 
 /* Info section */
