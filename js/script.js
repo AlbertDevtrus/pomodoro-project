@@ -14,6 +14,7 @@ import {
     favicon,
     errorMessage,
     iaContainer,
+    title
 } from './selectors.js';
 
 let goals = [];
@@ -67,6 +68,8 @@ worker.onmessage = function(event) {
         case 'change-sound':
             changeSound();
             break;
+        case 'title-text-content':
+            title.textContent = `${value} - Pomodoro timer`;
         default:
             console.warn('Tipo de mensaje desconocido:', event.data.type);
     }

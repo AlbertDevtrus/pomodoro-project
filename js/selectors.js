@@ -20,3 +20,5 @@ export const errorMessage = document.querySelector('.error');
 export const iaContainer = document.querySelector('#container-details');
 
 export const goalDetails = document.querySelector('.goal-details');
+
+export const title = document.querySelector('title');
