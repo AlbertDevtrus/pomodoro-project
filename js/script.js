@@ -10,7 +10,6 @@ import {
     addGoal,
     inputGoal,
     todolist,
-    counterGoals,
     favicon,
     errorMessage,
     iaContainer,
@@ -130,7 +129,6 @@ function createGoal() {
         const goalObj = {
             id: Date.now(),
             text: descriptionGoal,
-            state: false,
             ai: ''
         }
 
@@ -157,10 +155,9 @@ function generateHTMLGoal() {
 
         description.textContent = goal.text;
 
-        const check = createCheck(goal.id, goal.state);
+        const check = createCheck(goal.id);
         const edit = createEdit(goal.id);
         const deleter = createDelete(goal.id);
-        check.checked = goal.state;
 
         const div = document.createElement('div');
         div.appendChild(edit);
@@ -175,10 +172,9 @@ function generateHTMLGoal() {
         todolist.appendChild(goalItem);
     });
     syncStorage();
-    checkSelection();
 }
 
-function createCheck(id, state) {
+function createCheck(id) {
     const completeGoal = document.createElement("input");
     const label = document.createElement('label');
     const span = document.createElement('span');
@@ -186,16 +182,14 @@ function createCheck(id, state) {
     label.appendChild(span);
     label.setAttribute("class", "complete-goal");
     completeGoal.setAttribute("type", "checkbox");
-    completeGoal.checked = state;  
     completeGoal.onclick = () => {
-        goals.forEach(goal => {
-            if(id === goal.id) {
-                completeGoal.checked = !goal.state;
-                goal.state = completeGoal.checked;
-            }
-        });
-        syncStorage();
-        checkSelection();
+
+        const paragraph = completeGoal.parentNode.nextSibling;
+        paragraph.classList.add('selected');
+        
+        setTimeout( () => {
+            deleteElement(id);
+        }, 1500 );
     };
     return label;
 }
@@ -253,24 +247,6 @@ function clearHTML() {
 
 function syncStorage() {
     localStorage.setItem('goals', JSON.stringify(goals));
-}
-
-function checkPorcentaje(total, completed) {
-    return (100 / total) * completed;
-}
-
-function checkSelection() {
-    if(goals.length > 0) {
-        let goalsCompleted = 0;
-
-        goals.forEach(goal => {
-            if(goal.state) goalsCompleted++;
-        });
-
-        counterGoals.textContent = `${checkPorcentaje(goals.length, goalsCompleted).toFixed(2)}%`;
-    } else {
-        counterGoals.textContent = `0%`;
-    }
 }
 
 function goalIA() {

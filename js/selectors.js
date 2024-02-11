@@ -10,7 +10,6 @@ export const counterContainer = document.querySelector("#counter-container");
 export const addGoal = document.querySelector("#add-goal");
 export const inputGoal = document.querySelector("#input-goal");
 export const todolist = document.querySelector("#todolist");
-export const counterGoals = document.querySelector("#goals-completed");
 export const listItem = document.querySelectorAll(".list-item");
 export const favicon = document.querySelector("#favicon");
 export const checkbox = document.querySelectorAll('input[type="checkbox"]');
