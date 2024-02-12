@@ -1,5 +1,5 @@
 import { goalIA } from './ai.js';
-import { clearElement, changeTheme, changeSound, changeColor } from './utilitys.js';
+import { clearElement, changeTheme, changeSound, changeColor, syncStorage } from './utilitys.js';
 import { 
     themeButton,
     timer,
@@ -14,8 +14,8 @@ import {
     title
 } from './selectors.js';
 
-
 export let goals = [];
+
 
 eventListeners();
 function eventListeners() {
@@ -45,6 +45,10 @@ function eventListeners() {
     
     themeButton.addEventListener('click', changeTheme);
 }
+
+/*-----------------------------------------------------------------------------------------------*/
+/*                                         WEB WORKERS                                           */
+/*-----------------------------------------------------------------------------------------------*/
 
 worker.onmessage = function(event) {
     const { type, value, running } = event.data;
@@ -92,11 +96,10 @@ function createGoal() {
 
         goals = [...goals, goalObj];
 
+        inputGoal.value = "";
+        
         generateHTMLGoal();
         goalIA();
-
-        inputGoal.value = "";
-
         syncStorage();
 
     } else if (todolist.children.length >= 10) {
@@ -194,8 +197,4 @@ function deleteElement(id) {
 
     generateHTMLGoal();
     goalIA();
-}
-
-function syncStorage() {
-    localStorage.setItem('goals', JSON.stringify(goals));
 }

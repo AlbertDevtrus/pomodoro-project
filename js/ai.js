@@ -1,4 +1,4 @@
-import { clearElement } from './utilitys.js';
+import { clearElement, syncStorage } from './utilitys.js';
 import { iaContainer } from './selectors.js';
 import { goals } from './script.js';
 

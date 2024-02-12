@@ -47,3 +47,7 @@ export function changeColor(stageSeconds, running) {
         counterContainer.style.boxShadow = "inset 0px 0px 39px 32px rgba(0, 189, 60, 0.20)";
     }
 }
+
+export function syncStorage() {
+    localStorage.setItem('goals', JSON.stringify(goals));
+}
