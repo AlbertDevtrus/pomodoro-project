@@ -31,7 +31,6 @@ app.post('/get-advice', async (req, res) => {
         });
     
         res.json({ advice: advice.choices[0].message });
-        console.log(advice.choices[0].message);
     }
     catch (error){
         console.error('Error calling the API from OpenAI:', error);

@@ -52,7 +52,7 @@ function generateHTMLIa(id, goal, ai) {
     iaContainer.appendChild(details);
 }
 
-function callAPI(e) {
+async function callAPI(e) {
 
     const iaElement = e.target.parentNode.children[1];
 
@@ -77,34 +77,34 @@ function callAPI(e) {
         const requestData = {
             goal: goal.text 
         }
-        
-        fetch('http://127.0.0.1:3000/get-advice', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+
+
+        try {
+            const response = await fetch('http://127.0.0.1:3000/get-advice', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    },
                 body: JSON.stringify(requestData),
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error: ${response.statusText}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                clearElement(iaElement);
-                setAiResponse(data.advice.content, id, iaElement);
-            })
-            .catch(error => {
-                console.error('Error fetching advice:', error);
-                clearElement(iaElement);
-                alertIa(iaElement);
             });
+            
+            if (!response.ok) {
+                throw new Error(`Error: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+
+            clearElement(iaElement);
+            setAiResponse(data.advice.content, id, iaElement);
+
+        } catch (error) {
+            console.error('Error fetching advice:', error);
+            clearElement(iaElement);
+            alertIa(iaElement);
+        }
 
     }
 }
-
-
 
 function alertIa(element) {
     clearElement(element);

@@ -1,4 +1,6 @@
 import { themeButton, ringSound, favicon, counterContainer } from './selectors.js';
+import { goals } from './script.js';
+
 
 export function clearElement(element) {
     while(element.firstChild) {
