@@ -15,6 +15,9 @@ import {
     iaContainer,
     title
 } from './selectors.js';
+import { goalIA } from './ai.js';
+import { clearElement } from './utilitys.js';
+
 
 let goals = [];
 
@@ -55,7 +58,6 @@ worker.onmessage = function(event) {
             timer.textContent = value;
             break;
         case 'next-timer-text-content':
-            // Procesar mensaje de estado
             nextTimer.textContent = value;
             break;
         case 'change-color':
@@ -91,14 +93,12 @@ function changeColor(stageSeconds, running) {
     }
 }
 
-
 //play the alarm for the end
 function changeSound() {
     ringSound.currentTime = 0;
     ringSound.volume = 1;
     ringSound.play();
 }
-
 
 function changeTheme() {
     const root = document.documentElement;
@@ -119,6 +119,12 @@ function changeTheme() {
 
     root.setAttribute("data-theme", newTheme);
 }
+
+
+/*-----------------------------------------------------------------------------------------------*/
+/*                                         GOALS                                                 */
+/*-----------------------------------------------------------------------------------------------*/
+
 
 function createGoal() {
     const descriptionGoal = inputGoal.value;
@@ -147,7 +153,7 @@ function createGoal() {
 }
 
 function generateHTMLGoal() {
-    clearHTML();
+    clearElement(todolist);
 
     goals.forEach(goal => {
         const goalItem = document.createElement("li");
@@ -215,7 +221,6 @@ function createEdit(id) {
     editGoal.setAttribute("class", "edit-goal");
     editGoal.setAttribute('aria-label', 'edit');
     editGoal.classList.add("buttons-goal");
-    //class for the visual icon
     const iconEdit = document.createElement("i");
     iconEdit.classList.add("fa-solid", "fa-pen-to-square");
     editGoal.appendChild(iconEdit);
@@ -239,152 +244,6 @@ function deleteElement(id) {
     goalIA();
 }
 
-function clearHTML() {
-    while(todolist.firstChild) {
-        todolist.removeChild(todolist.firstChild);
-    }
-}
-
 function syncStorage() {
     localStorage.setItem('goals', JSON.stringify(goals));
-}
-
-function goalIA() {
-    clearHTMLAI();
-
-    if(goals.length <= 3) {
-    
-        for(let i = 0; i < goals.length; i++) {
-            const { id, text, ai } = goals[i];
-
-            generateHTMLIa(id, text, ai);
-        }
-
-    } else {
-
-        for(let i = 0; i < 3; i++) {
-            const { id, text, ai } = goals[i];
-            generateHTMLIa(id, text, ai);
-        }
-
-    }
-
-}
-
-function generateHTMLIa(id, goal, ai) {
-    const details = document.createElement('details');
-    details.dataset.id = id;
-
-    const summary = document.createElement('summary');
-    summary.classList.add('goal-details');
-    
-
-    summary.addEventListener('click', callAPI);
-    
-    summary.innerHTML = `${goal} <span ></span>`;
-
-    const adviceIa = document.createElement('p');
-    adviceIa.classList.add('ia-details');
-    
-    adviceIa.textContent = ai;
-    
-    details.appendChild(summary);
-    details.appendChild(adviceIa);
-
-    iaContainer.appendChild(details);
-}
-
-function callAPI(e) {
-
-    const iaElement = e.target.parentNode.children[1];
-
-    if(iaElement.parentNode.open) return;
-
-    const id = parseInt(e.target.parentNode.dataset.id);
-
-    const goal = goals.find(goal => goal.id === id);
-    
-    if (goal.ai === '') {
-    
-        const spinner = `
-        <div class="spinner">
-            <div class="bounce1"></div>
-            <div class="bounce2"></div>
-            <div class="bounce3"></div>
-        </div>
-        `;
-        
-        iaElement.innerHTML = spinner;
-
-        const requestData = {
-            goal: goal.text 
-        }
-        
-        fetch('http://127.0.0.1:3000/get-advice', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-                body: JSON.stringify(requestData),
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error: ${response.statusText}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                clearElement(iaElement);
-                setAiResponse(data.advice.content, id, iaElement);
-            })
-            .catch(error => {
-                console.error('Error fetching advice:', error);
-                clearElement(iaElement);
-                alertIa(iaElement);
-            });
-
-    }
-}
-
-function clearElement(element) {
-    while(element.firstChild) {
-        element.removeChild(element.firstChild);
-    }
-}
-
-function alertIa(element) {
-    clearElement(element);
-
-    element.classList.add('error-2');
-
-    element.textContent = 'Error generating your advice :(';
-
-    setTimeout(() => {
-        element.classList.remove('error-2');
-        element.textContent = '';
-        element.parentNode.open = false;
-    }, 3000);
-}
-
-function clearHTMLAI() {
-    while(iaContainer.firstChild) {
-        iaContainer.removeChild(iaContainer.firstChild);
-    }
-    const aiParagraph = document.createElement('p');
-    aiParagraph.textContent = 'Here you can use the AI to take advices about your goals, with a simple click you get a customized IA response to your task.';
-
-    iaContainer.appendChild(aiParagraph);
-}
-
-function setAiResponse(response, id, element) {
-
-    goals.forEach(goal => {
-        if (goal.id === id) {
-            goal.ai = response;
-        } 
-    })
-
-    element.innerHTML = response;
-
-    syncStorage();
 }

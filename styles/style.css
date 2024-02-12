@@ -264,7 +264,7 @@ header {
 #todolist-container {
     display: flex;
     flex-direction: column;
-    margin: 40px auto;
+    margin: 80px auto 40px auto;
     background-color: var(--blue2);
     width: 50vw;
     padding: 20px 30px;
