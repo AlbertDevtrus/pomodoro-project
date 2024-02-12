@@ -340,12 +340,12 @@ header {
 
 .error {
     display: none;
-    padding: 10px 20px;
-    margin: 30px 0px 0px 0px;
+    padding: 8px 10px;
+    margin:  10px 0px 0px 0px;
     width: auto;
-    border-radius: 15px;
+    border-radius: 12px;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     border: 2px solid var(--red);
     background-color: rgba(250, 0, 0, 0.1);
     text-align: center;

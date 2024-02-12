@@ -86,7 +86,6 @@ function createGoal() {
     const descriptionGoal = inputGoal.value;
 
     if (descriptionGoal.trim() !== "" && todolist.children.length < 10 && descriptionGoal.length <= 100) {
-        errorMessage.style.display = 'none';
 
         const goalObj = {
             id: Date.now(),
@@ -104,6 +103,10 @@ function createGoal() {
 
     } else if (todolist.children.length >= 10) {
         errorMessage.style.display = 'inline';
+
+        setTimeout( () => {
+            errorMessage.style.display = 'none';
+        }, 3000 );
     }
 }
 
