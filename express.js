@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
     res.sendFile('./index.html');
 });
 
-app.post('https://pomodoro-timer-gamma-lemon.vercel.app/get-advice', async (req, res) => {
+app.post('/get-advice', async (req, res) => {
     try {
         const userGoal = req.body.goal;
 
