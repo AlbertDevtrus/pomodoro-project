@@ -70,7 +70,7 @@ worker.onmessage = function(event) {
             changeSound();
             break;
         case 'title-text-content':
-            title.textContent = `${value} - Pomodoro timer`;
+            title.textContent = value;
             break;
         default:
             console.warn('Tipo de mensaje desconocido:', event.data.type);

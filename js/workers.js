@@ -14,7 +14,7 @@ function updateTimer () {
     } else {
     seconds--;
     }
-    sendMesage('title-text-content', formatSeconds(seconds));
+    sendMesage('title-text-content', `${formatSeconds(seconds)} - Pomodoro timer`);
     sendMesage('timer-text-content', formatSeconds(seconds));
 }
 
