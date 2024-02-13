@@ -19,10 +19,10 @@ app.use(cors({
 }));
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile('./index.html');
 });
 
-app.post('/get-advice', async (req, res) => {
+app.post('https://pomodoro-timer-gamma-lemon.vercel.app/get-advice', async (req, res) => {
     try {
         const userGoal = req.body.goal;
 
