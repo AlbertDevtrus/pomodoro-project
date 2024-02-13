@@ -2,8 +2,8 @@
     "version": 2,
     "builds": [
       {
-        "src": "./js/express.js",
-        "use": "@vercel/node-bridge"
+        "src": "express.js",
+        "use": "@vercel/node"
       }
     ]
   }
