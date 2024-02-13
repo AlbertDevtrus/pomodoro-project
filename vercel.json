@@ -3,7 +3,7 @@
     "builds": [
       {
         "src": "./js/express.js",
-        "use": "@now/node-server"
+        "use": "@vercel/node-bridge"
       }
     ]
   }
