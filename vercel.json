@@ -1,0 +1,9 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "./js/express.js",
+        "use": "@now/node-server"
+      }
+    ]
+  }
