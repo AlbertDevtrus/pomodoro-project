@@ -16,6 +16,10 @@ app.use(express.json());
 
 app.use(cors());
 
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
+
 app.post('/get-advice', async (req, res) => {
     try {
         const userGoal = req.body.goal;
