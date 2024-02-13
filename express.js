@@ -44,5 +44,5 @@ app.post('/get-advice', async (req, res) => {
 
 
 app.listen(port, () => {
-    console.log(`Running server in port ${port}`)
+    console.log(`Running server`)
 })
