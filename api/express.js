@@ -15,7 +15,8 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use(cors({
-    origin: 'https://pomodoro-timer-minimalist.vercel.app/'
+    origin: 'https://pomodoro-timer-minimalist.vercel.app/',
+    methods: ['GET', 'POST']
 }));
 
 app.get('/', (res) => {

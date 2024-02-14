@@ -1,10 +1,14 @@
 {
-  "version": 2,
-  "routes": [
-    { "handle": "filesystem" },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ]
-}
+    "version": 2,
+    "routes": [
+      { "handle": "filesystem" },
+      {
+        "src": "/get-advice",
+        "dest": "/api/express.js"
+      },
+      {
+        "src": "/",
+        "dest": "/index.html"
+      }
+    ]
+  }
