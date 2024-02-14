@@ -4,7 +4,7 @@
     { "handle": "filesystem" },
     {
       "src": "/get-advice",
-      "dest": "./express.js"
+      "dest": "/express.js"
     },
     {
       "src": "/(.*)",
