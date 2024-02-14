@@ -15,7 +15,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use(cors({
-    origin: 'https://pomodoro-timer-gamma-lemon.vercel.app/'
+    origin: 'https://pomodoro-timer-gamma-lemon.vercel.app'
 }));
 
 app.get('/', (res) => {
