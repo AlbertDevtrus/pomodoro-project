@@ -3,10 +3,6 @@
   "routes": [
     { "handle": "filesystem" },
     {
-      "src": "/get-advice",
-      "dest": "/express.js"
-    },
-    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
