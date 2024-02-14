@@ -80,7 +80,7 @@ async function callAPI(e) {
 
 
         try {
-            const response = await fetch('https://pomodoro-timer-gamma-lemon.vercel.app/get-advice', {
+            const response = await fetch('https://pomodoro-timer-minimalist.vercel.app/get-advice', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
