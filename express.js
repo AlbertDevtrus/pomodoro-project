@@ -18,7 +18,7 @@ app.use(cors({
     origin: 'https://pomodoro-timer-gamma-lemon.vercel.app/'
 }));
 
-app.get('/', (req, res) => {
+app.get('/', (res) => {
     res.sendFile('./index.html');
 });
 
